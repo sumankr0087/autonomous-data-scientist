@@ -19,6 +19,8 @@ class GraphState(TypedDict, total=False):
 
     # --- produced by the agents ---
     plan: list[str]            # planner  -> ordered steps
+    needs_ml: bool             # planner  -> whether the ML step is required
+    rationale: str             # planner  -> one-line plan rationale
     sql: str                   # sql_agent -> generated query
     query_result: list[dict]   # sql_agent -> rows as records
     eda: dict[str, Any]        # eda_agent -> findings (trends, anomalies)

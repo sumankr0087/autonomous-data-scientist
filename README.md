@@ -98,7 +98,7 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
 - [x] **Step 3 — Workflow skeleton:** shared `GraphState`, LangGraph wiring
   (planner → sql → eda → ml → viz → report), runnable stub nodes.
   Command: `python main.py run "Why did sales drop in Maharashtra last quarter?"`
-- [ ] **Step 4 — Planner agent:** question → structured plan.
+- [x] **Step 4 — Planner agent:** question + schema -> ordered plan + step flags (Gemini, JSON, fallback).
 - [ ] **Step 5 — SQL agent:** generate → validate → execute, with retries.
 - [ ] **Step 6 — EDA agent:** profiling, trend & anomaly detection.
 - [ ] **Step 7 — ML agent:** baseline models & driver analysis.
@@ -137,16 +137,13 @@ Seed: `python main.py seed`. Schema: `python main.py schema`.
 ### ✅ Step 3 — Workflow skeleton *(done)*
 `src/ads/graph/{state,nodes,workflow}.py`. Run: `python main.py run "..."`.
 
-### ⬜ Step 4 — Planner agent
-- **Goal:** turn the question + schema into a concrete, ordered plan and decide
-  which downstream steps are needed (e.g. skip ML for a pure lookup).
-- **Create:** `src/ads/agents/planner.py` with `plan(question, schema) -> PlanResult`
-  (a dataclass/pydantic model: `steps: list[str]`, `needs_ml: bool`, `rationale: str`).
-- **Implement:** build a prompt with the schema from `SQLTool().get_schema()`, call
-  `get_llm_client().complete(prompt, system=...)`, parse JSON from the reply
-  (ask the model to return strict JSON; validate with pydantic).
-- **Wire:** replace `planner_node` in `nodes.py` to call this and store `plan` in state.
-- **Test:** `tests/test_planner.py` — mock the LLM client; assert the plan parses.
+### ✅ Step 4 — Planner agent *(done)*
+`src/ads/agents/planner.py` — `plan(question, schema, llm=None) -> PlanResult`
+(pydantic: `steps`, `needs_sql`, `needs_ml`, `needs_viz`, `rationale`). Prompts
+Gemini for strict JSON, parses defensively (handles ```json fences), and falls
+back to a sensible default plan if the LLM is unavailable. Wired into
+`planner_node`; `GraphState` gains `needs_ml` / `rationale`. Tests inject a fake
+LLM (no network). Test: `pytest -k planner`.
 
 ### ⬜ Step 5 — SQL agent
 - **Goal:** generate SQL for the question, validate, execute, self-correct on error.

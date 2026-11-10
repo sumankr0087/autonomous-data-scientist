@@ -21,16 +21,22 @@ def _run_log(state: GraphState):
 
 
 def planner_node(state: GraphState) -> dict:
-    _run_log(state).info("[planner] decomposing question (stub)")
-    # Later: call the Planner agent to produce a real plan from the question.
-    plan = [
-        "Query sales data relevant to the question",
-        "Run exploratory analysis (trends, anomalies)",
-        "Train a model to find drivers",
-        "Visualize findings",
-        "Write an executive report",
-    ]
-    return {"plan": plan, "status": "planned", "steps_completed": [AgentName.PLANNER.value]}
+    """Real planner: question + schema -> ordered plan + step flags."""
+    from ads.agents.planner import plan as make_plan
+    from ads.tools.sql_tool import SQLTool
+
+    rlog = _run_log(state)
+    rlog.info("[planner] planning")
+    schema = SQLTool().get_schema()
+    result = make_plan(state["question"], schema)
+    rlog.info("[planner] %s", result.rationale or "plan ready")
+    return {
+        "plan": result.steps,
+        "needs_ml": result.needs_ml,
+        "rationale": result.rationale,
+        "status": "planned",
+        "steps_completed": [AgentName.PLANNER.value],
+    }
 
 
 def sql_node(state: GraphState) -> dict:

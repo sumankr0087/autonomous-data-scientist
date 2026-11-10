@@ -1,0 +1,30 @@
+# ---- Core ----
+pydantic>=2.7
+pydantic-settings>=2.2
+python-dotenv>=1.0
+rich>=13.7
+
+# ---- LLM / Agent orchestration ----
+openai>=1.40
+anthropic>=0.34
+langchain>=0.2
+langchain-core>=0.2
+langgraph>=0.2
+
+# ---- Data / SQL ----
+duckdb>=1.0
+pandas>=2.2
+numpy>=1.26
+
+# ---- ML ----
+scikit-learn>=1.5
+
+# ---- Visualization ----
+matplotlib>=3.9
+plotly>=5.23
+
+# ---- UI ----
+streamlit>=1.37
+
+# ---- Dev / test (optional) ----
+pytest>=8.3

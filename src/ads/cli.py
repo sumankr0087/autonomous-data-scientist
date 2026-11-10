@@ -81,14 +81,16 @@ def cmd_schema(args: argparse.Namespace) -> int:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
-    """Run the agent workflow against a business question (later steps)."""
-    run_log = bind(log, run_id="cli")
-    run_log.info("Received question: %s", args.question)
-    run_log.warning(
-        "The agent workflow is not implemented yet (Step 1 = foundation). "
-        "SQL / EDA / ML / report agents are added in the next steps."
-    )
-    return 0
+    """Run the agent workflow against a business question."""
+    from ads.graph.workflow import run_workflow
+
+    result = run_workflow(args.question)
+    print("\n" + "=" * 60)
+    print(f"Status : {result.get('status')}")
+    print(f"Steps  : {' -> '.join(result.get('steps_completed', []))}")
+    print("=" * 60)
+    print(result.get("report", "(no report)"))
+    return 0 if result.get("status") == "completed" else 1
 
 
 def build_parser() -> argparse.ArgumentParser:

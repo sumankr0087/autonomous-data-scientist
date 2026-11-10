@@ -40,8 +40,30 @@ def planner_node(state: GraphState) -> dict:
 
 
 def sql_node(state: GraphState) -> dict:
-    _run_log(state).info("[sql_agent] generating & running SQL (stub)")
-    return {"status": "queried", "steps_completed": [AgentName.SQL.value]}
+    """Real SQL agent: generate -> run -> self-correct, store rows in state."""
+    from ads.agents.sql_agent import answer as sql_answer
+
+    rlog = _run_log(state)
+    rlog.info("[sql_agent] generating & running SQL")
+    result = sql_answer(state["question"], plan=state.get("plan"))
+
+    if not result.ok:
+        rlog.error("[sql_agent] failed after %d attempts: %s", result.attempts, result.error)
+        return {
+            "status": "sql_failed",
+            "errors": [f"sql_agent: {result.error}"],
+            "steps_completed": [AgentName.SQL.value],
+        }
+
+    rlog.info("[sql_agent] %d rows (attempt %d)", result.row_count, result.attempts)
+    return {
+        "sql": result.sql,
+        "query_result": result.rows,
+        "query_columns": result.columns,
+        "row_count": result.row_count,
+        "status": "queried",
+        "steps_completed": [AgentName.SQL.value],
+    }
 
 
 def eda_node(state: GraphState) -> dict:

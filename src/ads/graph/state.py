@@ -23,6 +23,8 @@ class GraphState(TypedDict, total=False):
     rationale: str             # planner  -> one-line plan rationale
     sql: str                   # sql_agent -> generated query
     query_result: list[dict]   # sql_agent -> rows as records
+    query_columns: list[str]   # sql_agent -> result column names
+    row_count: int             # sql_agent -> total rows returned
     eda: dict[str, Any]        # eda_agent -> findings (trends, anomalies)
     ml: dict[str, Any]         # ml_agent  -> model results / drivers
     viz: list[str]             # viz_agent -> chart file paths

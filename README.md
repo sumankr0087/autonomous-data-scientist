@@ -99,7 +99,7 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
   (planner → sql → eda → ml → viz → report), runnable stub nodes.
   Command: `python main.py run "Why did sales drop in Maharashtra last quarter?"`
 - [x] **Step 4 — Planner agent:** question + schema -> ordered plan + step flags (Gemini, JSON, fallback).
-- [ ] **Step 5 — SQL agent:** generate → validate → execute, with retries.
+- [x] **Step 5 — SQL agent:** generate -> validate -> execute with self-correcting retries (Gemini).
 - [ ] **Step 6 — EDA agent:** profiling, trend & anomaly detection.
 - [ ] **Step 7 — ML agent:** baseline models & driver analysis.
 - [ ] **Step 8 — Viz + Report agents:** charts and the executive report.
@@ -145,14 +145,13 @@ back to a sensible default plan if the LLM is unavailable. Wired into
 `planner_node`; `GraphState` gains `needs_ml` / `rationale`. Tests inject a fake
 LLM (no network). Test: `pytest -k planner`.
 
-### ⬜ Step 5 — SQL agent
-- **Goal:** generate SQL for the question, validate, execute, self-correct on error.
-- **Create:** `src/ads/agents/sql_agent.py` with `answer(question, schema) -> (sql, df)`.
-- **Implement:** prompt the LLM with the schema → candidate SQL → `SQLTool().run(sql)`.
-  On `SQLGenerationError`/`SQLExecutionError`, feed the error back to the LLM and
-  retry up to `settings.max_agent_steps` (reflection/retry loop).
-- **Wire:** `sql_node` stores `sql` and `query_result` (records) in state.
-- **Test:** seed a temp DB, stub the LLM to return a known query, assert rows return.
+### ✅ Step 5 — SQL agent *(done)*
+`src/ads/agents/sql_agent.py` — `answer(question, schema, plan, llm=None, sql_tool=None)`
+→ `SQLAnswer(ok, sql, columns, rows, row_count, attempts, error)`. Prompts Gemini
+for a single DuckDB SELECT (concise; prefers existing dim columns), runs it via
+`SQLTool`, and **self-corrects** by feeding errors back on retry. Uses a larger
+token budget (gemini-2.5-flash spends output tokens on reasoning). Wired into
+`sql_node`. Tests use a scripted fake LLM + seeded temp DB. Test: `pytest -k sql_agent`.
 
 ### ⬜ Step 6 — EDA agent
 - **Goal:** profile the result set — summary stats, time trends, group comparisons,

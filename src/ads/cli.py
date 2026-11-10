@@ -58,6 +58,28 @@ def self_check() -> int:
     return 0 if ok else 1
 
 
+def cmd_seed(args: argparse.Namespace) -> int:
+    """Generate the sample dataset and load it into DuckDB."""
+    from ads.data.seed import seed_database
+    from ads.tools.database import Database
+
+    db = Database()
+    log.info("Seeding sample warehouse at %s", db.path)
+    counts = seed_database(db)
+    for table, n in counts.items():
+        log.info("  %-10s %6d rows", table, n)
+    log.info("Seed complete. Tables: %s", ", ".join(db.list_tables()))
+    return 0
+
+
+def cmd_schema(args: argparse.Namespace) -> int:
+    """Print the warehouse schema (what the SQL agent sees)."""
+    from ads.tools.sql_tool import SQLTool
+
+    print(SQLTool().get_schema())
+    return 0
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     """Run the agent workflow against a business question (later steps)."""
     run_log = bind(log, run_id="cli")
@@ -78,6 +100,8 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command")
 
     sub.add_parser("check", help="Validate configuration and environment.")
+    sub.add_parser("seed", help="Generate the sample dataset into DuckDB.")
+    sub.add_parser("schema", help="Print the warehouse schema.")
 
     run_p = sub.add_parser("run", help="Answer a business question (coming in later steps).")
     run_p.add_argument("question", help="A natural-language business question.")
@@ -95,6 +119,10 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "check" or args.command is None:
             return self_check()
+        if args.command == "seed":
+            return cmd_seed(args)
+        if args.command == "schema":
+            return cmd_schema(args)
         if args.command == "run":
             return cmd_run(args)
         parser.print_help()

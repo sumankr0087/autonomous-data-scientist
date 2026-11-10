@@ -92,7 +92,9 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
 - [x] **Step 1 — Foundation:** project scaffold, typed config, production logging
   (console + rotating file, JSON option), exception hierarchy, provider-agnostic
   LLM client, runnable CLI + smoke tests.
-- [ ] **Step 2 — Data layer:** DuckDB connection, sample dataset seeding, SQL tool.
+- [x] **Step 2 — Data layer:** DuckDB connection manager, deterministic sample
+  sales dataset (with a built-in Maharashtra Q4 drop), seeding routine, and a
+  guarded read-only SQL tool. Commands: `python main.py seed`, `python main.py schema`.
 - [ ] **Step 3 — Workflow skeleton:** shared `GraphState`, LangGraph wiring, node stubs.
 - [ ] **Step 4 — Planner agent:** question → structured plan.
 - [ ] **Step 5 — SQL agent:** generate → validate → execute, with retries.

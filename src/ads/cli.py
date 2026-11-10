@@ -86,8 +86,16 @@ def cmd_run(args: argparse.Namespace) -> int:
 
     result = run_workflow(args.question)
     print("\n" + "=" * 60)
-    print(f"Status : {result.get('status')}")
-    print(f"Steps  : {' -> '.join(result.get('steps_completed', []))}")
+    print(f"Question : {args.question}")
+    print(f"Status   : {result.get('status')}")
+    print(f"Steps    : {' -> '.join(result.get('steps_completed', []))}")
+    print("-" * 60)
+    print("PLAN (from the Planner agent):")
+    if result.get("rationale"):
+        print(f"  rationale : {result['rationale']}")
+    print(f"  needs_ml  : {result.get('needs_ml')}")
+    for i, step in enumerate(result.get("plan", []), 1):
+        print(f"  {i}. {step}")
     print("=" * 60)
     print(result.get("report", "(no report)"))
     return 0 if result.get("status") == "completed" else 1

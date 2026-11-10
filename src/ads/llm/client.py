@@ -100,11 +100,47 @@ class AnthropicClient(BaseLLMClient):
         return LLMResponse(text=text, model=self.settings.llm_model, raw=resp)
 
 
+class GeminiClient(BaseLLMClient):
+    """Google Gemini via the current `google-genai` SDK (free tier available)."""
+
+    def __init__(self, settings: Settings) -> None:
+        super().__init__(settings)
+        if not settings.google_api_key:
+            raise ConfigError("GOOGLE_API_KEY is not set but llm_provider=gemini")
+        try:
+            from google import genai  # lazy import
+        except ImportError as exc:  # pragma: no cover
+            raise ConfigError(
+                "`google-genai` not installed. `pip install google-genai`"
+            ) from exc
+        self._genai = genai
+        self._client = genai.Client(api_key=settings.google_api_key)
+
+    def complete(self, prompt: str, *, system: str | None = None, **kwargs: Any) -> LLMResponse:
+        from google.genai import types
+
+        try:
+            resp = self._client.models.generate_content(
+                model=self.settings.llm_model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=system or None,
+                    temperature=kwargs.get("temperature", self.settings.llm_temperature),
+                    max_output_tokens=kwargs.get("max_tokens", self.settings.llm_max_tokens),
+                ),
+            )
+        except Exception as exc:  # noqa: BLE001
+            raise LLMError("Gemini completion failed", details=str(exc)) from exc
+        return LLMResponse(text=resp.text or "", model=self.settings.llm_model, raw=resp)
+
+
 def get_llm_client(settings: Settings | None = None) -> BaseLLMClient:
     """Factory: return the client for the configured provider."""
     settings = settings or get_settings()
     provider = settings.llm_provider
     log.debug("Creating LLM client", extra={"provider": provider, "model": settings.llm_model})
+    if provider == "gemini":
+        return GeminiClient(settings)
     if provider == "openai":
         return OpenAIClient(settings)
     if provider == "anthropic":

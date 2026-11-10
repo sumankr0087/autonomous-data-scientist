@@ -15,7 +15,7 @@ def test_settings_load():
     settings = get_settings()
     assert isinstance(settings, Settings)
     assert settings.app_name == "autonomous-data-scientist"
-    assert settings.llm_provider in {"openai", "anthropic"}
+    assert settings.llm_provider in {"gemini", "openai", "anthropic"}
 
 
 def test_version_exposed():

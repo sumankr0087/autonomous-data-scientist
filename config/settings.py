@@ -45,12 +45,13 @@ class Settings(BaseSettings):
     log_to_file: bool = True
 
     # ---- LLM ----
-    llm_provider: Literal["openai", "anthropic"] = "openai"
-    llm_model: str = "gpt-4o-mini"
+    llm_provider: Literal["gemini", "openai", "anthropic"] = "gemini"
+    llm_model: str = "gemini-2.5-flash"
     llm_temperature: float = 0.0
     llm_max_tokens: int = 2000
     openai_api_key: str | None = None
     anthropic_api_key: str | None = None
+    google_api_key: str | None = None
 
     # ---- Data / DB ----
     duckdb_path: str = str(DATA_DIR / "warehouse.duckdb")
@@ -63,7 +64,11 @@ class Settings(BaseSettings):
     @property
     def active_api_key(self) -> str | None:
         """Return the API key for the configured provider."""
-        return self.openai_api_key if self.llm_provider == "openai" else self.anthropic_api_key
+        return {
+            "gemini": self.google_api_key,
+            "openai": self.openai_api_key,
+            "anthropic": self.anthropic_api_key,
+        }.get(self.llm_provider)
 
 
 @lru_cache

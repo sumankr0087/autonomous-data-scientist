@@ -32,4 +32,4 @@ def test_workflow_runs_all_nodes_in_order():
     assert result["steps_completed"] == expected
     assert result["status"] == "completed"
     assert "plan" in result and len(result["plan"]) >= 3
-    assert result["report"].startswith("# Report")
+    assert "Executive Report" in result["report"]

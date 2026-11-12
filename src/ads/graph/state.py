@@ -29,6 +29,7 @@ class GraphState(TypedDict, total=False):
     ml: dict[str, Any]         # ml_agent  -> model results / drivers
     viz: list[str]             # viz_agent -> chart file paths
     report: str                # report_agent -> final markdown report
+    report_path: str           # report_agent -> saved report file path
 
     # --- control / observability ---
     status: str

@@ -101,8 +101,8 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
 - [x] **Step 4 — Planner agent:** question + schema -> ordered plan + step flags (Gemini, JSON, fallback).
 - [x] **Step 5 — SQL agent:** generate -> validate -> execute with self-correcting retries (Gemini).
 - [x] **Step 6 — EDA agent:** deterministic profiling + anomaly detection + LLM narrative.
-- [ ] **Step 7 — ML agent:** baseline models & driver analysis.
-- [ ] **Step 8 — Viz + Report agents:** charts and the executive report.
+- [x] **Step 7 — ML agent:** baseline RandomForest, metrics + feature importances (runs when needs_ml).
+- [x] **Step 8 — Viz + Report agents:** matplotlib charts + LLM executive report saved to artifacts/
 - [ ] **Step 9 — Advanced:** reflection, memory, human-approval loop.
 - [ ] **Step 10 — Streamlit UI.**
 - [ ] **Step 11 — Tests, Docker, CI.**
@@ -160,21 +160,18 @@ token budget (gemini-2.5-flash spends output tokens on reasoning). Wired into
 are deterministic, the narrative is LLM-written with an offline template fallback.
 Wired into `eda_node` (stores `eda = {findings, narrative}`). Test: `pytest -k eda`.
 
-### ⬜ Step 7 — ML agent
-- **Goal:** when `needs_ml`, train a baseline model (regression/classification) to
-  find drivers; report feature importances and key metrics.
-- **Create:** `src/ads/agents/ml_agent.py` + `src/ads/tools/ml_tool.py`
-  (scikit-learn pipeline, train/test split, metrics, feature importance).
-- **Wire:** `ml_node` stores `ml` (metrics + drivers). Skip when `plan.needs_ml` is false.
-- **Test:** small synthetic dataset; assert a model trains and returns importances.
+### ✅ Step 7 — ML agent *(done)*
+`src/ads/tools/ml_tool.py` — `train_baseline(df, target)` → `MlOutcome` (auto task
+detection, one-hot encoding, RandomForest, metrics + ranked feature importances).
+`src/ads/agents/ml_agent.py` — `run_ml(data, question)` → `MlResult`. Runs only
+when `needs_ml` (else `ml_node` skips). Test: `pytest -k ml_report`.
 
-### ⬜ Step 8 — Visualization + Report agents
-- **Goal:** render charts for the findings and compose an executive report.
-- **Create:** `src/ads/tools/viz_tool.py` (matplotlib/Plotly → PNG in `artifacts/`),
-  `src/ads/agents/report_agent.py` (LLM turns findings into a Markdown report;
-  optionally export PDF).
-- **Wire:** `viz_node` stores chart paths in `viz`; `report_node` stores `report`.
-- **Test:** assert chart files are created and the report mentions the key finding.
+### ✅ Step 8 — Visualization + Report agents *(done)*
+`src/ads/tools/viz_tool.py` — headless matplotlib `make_charts()` → PNG(s) of the
+top movers in `artifacts/`. `src/ads/agents/report_agent.py` — `compose(...)`
+writes an executive Markdown report (LLM + offline fallback) to
+`artifacts/report_<run_id>.md`. Wired into `viz_node` / `report_node`; the `run`
+command prints the SQL, EDA findings and final report. Test: `pytest -k ml_report`.
 
 ### ⬜ Step 9 — Advanced patterns
 - **Reflection:** after SQL/EDA, ask the LLM to critique and optionally revise.

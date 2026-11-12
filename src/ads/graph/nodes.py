@@ -83,21 +83,58 @@ def eda_node(state: GraphState) -> dict:
 
 
 def ml_node(state: GraphState) -> dict:
-    _run_log(state).info("[ml_agent] training baseline model (stub)")
-    return {"status": "modeled", "steps_completed": [AgentName.ML.value]}
+    """Train a baseline model — only when the planner flagged needs_ml."""
+    rlog = _run_log(state)
+    if not state.get("needs_ml"):
+        rlog.info("[ml_agent] skipped (needs_ml=False)")
+        return {
+            "ml": {"ran": False, "summary": "ML not required for this question."},
+            "status": "modeled",
+            "steps_completed": [AgentName.ML.value],
+        }
+
+    from ads.agents.ml_agent import run_ml
+
+    rlog.info("[ml_agent] training baseline model")
+    result = run_ml(state.get("query_result", []), state["question"])
+    rlog.info("[ml_agent] %s", result.summary)
+    return {
+        "ml": {"ran": result.ran, "summary": result.summary, **result.outcome},
+        "status": "modeled",
+        "steps_completed": [AgentName.ML.value],
+    }
 
 
 def viz_node(state: GraphState) -> dict:
-    _run_log(state).info("[viz_agent] creating charts (stub)")
-    return {"status": "visualized", "steps_completed": [AgentName.VIZ.value]}
+    """Render charts from the SQL result into artifacts/."""
+    from ads.tools.viz_tool import make_charts
+
+    rlog = _run_log(state)
+    rlog.info("[viz_agent] creating charts")
+    paths = make_charts(state.get("query_result", []), run_id=state.get("run_id", "run"))
+    rlog.info("[viz_agent] %d chart(s)", len(paths))
+    return {"viz": paths, "status": "visualized", "steps_completed": [AgentName.VIZ.value]}
 
 
 def report_node(state: GraphState) -> dict:
-    _run_log(state).info("[report_agent] composing report (stub)")
-    report = (
-        "# Report (stub)\n\n"
-        f"Question: {state.get('question', '')}\n\n"
-        "The full report is generated once the agents are implemented "
-        "(Steps 4-8)."
+    """Compose the executive report from everything the pipeline produced."""
+    from ads.agents.report_agent import compose
+
+    rlog = _run_log(state)
+    rlog.info("[report_agent] composing report")
+    eda = (state.get("eda") or {}).get("narrative", "")
+    ml = (state.get("ml") or {}).get("summary", "")
+    result = compose(
+        question=state["question"],
+        plan=state.get("plan"),
+        eda_narrative=eda,
+        ml_summary=ml,
+        charts=state.get("viz"),
+        run_id=state.get("run_id", "run"),
     )
-    return {"report": report, "status": "completed", "steps_completed": [AgentName.REPORT.value]}
+    return {
+        "report": result.markdown,
+        "report_path": result.path or "",
+        "status": "completed",
+        "steps_completed": [AgentName.REPORT.value],
+    }

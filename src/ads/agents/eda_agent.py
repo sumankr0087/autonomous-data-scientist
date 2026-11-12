@@ -14,6 +14,7 @@ from typing import Any
 
 import pandas as pd
 
+from ads.core.exceptions import RateLimitError
 from ads.core.logging import get_logger
 from ads.llm.client import BaseLLMClient, get_llm_client
 from ads.tools.eda_tool import analyze_dataframe
@@ -83,6 +84,8 @@ def analyze(
         if not narrative:
             raise ValueError("empty narrative")
         return EdaResult(findings=findings, narrative=narrative)
+    except RateLimitError:
+        raise
     except Exception as exc:  # noqa: BLE001
         log.warning("EDA narrative via LLM failed, using template: %s", exc)
         return EdaResult(findings=findings, narrative=_template_narrative(findings))

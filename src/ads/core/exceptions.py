@@ -28,6 +28,22 @@ class LLMError(ADSError):
     """The LLM provider failed, timed out, or returned an unusable response."""
 
 
+class RateLimitError(LLMError):
+    """The LLM provider's rate / quota limit was hit (e.g. 429 RESOURCE_EXHAUSTED)."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        details: str | None = None,
+        retry_after: str | None = None,
+        window: str | None = None,
+    ) -> None:
+        super().__init__(message, details=details)
+        self.retry_after = retry_after  # e.g. "38m 55s"
+        self.window = window            # "minute" | "hour" | "day" | None
+
+
 class SQLGenerationError(ADSError):
     """The agent could not produce valid SQL for the question."""
 

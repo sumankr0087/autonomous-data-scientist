@@ -21,6 +21,7 @@ import re
 
 from pydantic import BaseModel, Field, ValidationError
 
+from ads.core.exceptions import RateLimitError
 from ads.core.logging import get_logger
 from ads.llm.client import BaseLLMClient, get_llm_client
 
@@ -104,6 +105,8 @@ def plan(question: str, schema: str, llm: BaseLLMClient | None = None) -> PlanRe
             raise ValueError("Planner returned no steps")
         log.info("Planner produced %d steps (needs_ml=%s)", len(result.steps), result.needs_ml)
         return result
+    except RateLimitError:
+        raise
     except (ValueError, ValidationError, json.JSONDecodeError) as exc:
         log.warning("Planner parse/validation failed, using default plan: %s", exc)
         return _default_plan(question)

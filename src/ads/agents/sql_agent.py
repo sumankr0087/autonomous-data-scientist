@@ -15,7 +15,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
-from ads.core.exceptions import LLMError, SQLExecutionError, SQLGenerationError
+from ads.core.exceptions import LLMError, RateLimitError, SQLExecutionError, SQLGenerationError
 from ads.core.logging import get_logger
 from ads.llm.client import BaseLLMClient, get_llm_client
 from ads.tools.sql_tool import SQLTool
@@ -133,6 +133,8 @@ def answer(
                 row_count=len(df),
                 attempts=attempt,
             )
+        except RateLimitError:
+            raise  # don't retry a quota/rate limit — surface it
         except (SQLGenerationError, SQLExecutionError, LLMError) as exc:
             last_error = str(exc)
             log.warning("SQL attempt %d failed: %s", attempt, last_error)

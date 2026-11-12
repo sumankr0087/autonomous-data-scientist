@@ -103,8 +103,21 @@ def _charts_as_data_urls(paths: list[str]) -> list[str]:
 
 @app.post("/run")
 def run(req: RunRequest) -> dict:
+    from ads.core.exceptions import RateLimitError
+
     try:
         result = run_workflow(req.question)
+    except RateLimitError as exc:
+        when = f" Try again in about {exc.retry_after}." if exc.retry_after else " Please try again later."
+        window = f" (the {exc.window}ly free limit was reached)" if exc.window else ""
+        log.warning("Rate limited: %s", exc.details)
+        return {
+            "status": "rate_limited",
+            "message": f"The AI usage limit has been reached{window}.{when}",
+            "retry_after": exc.retry_after,
+            "window": exc.window,
+            "question": req.question,
+        }
     except Exception as exc:  # noqa: BLE001 - surface the real cause to the client
         log.exception("Run failed")
         return {"status": "error", "error": f"{type(exc).__name__}: {exc}", "question": req.question}

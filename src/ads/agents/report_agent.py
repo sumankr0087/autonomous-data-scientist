@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 from config.settings import ARTIFACTS_DIR
 
+from ads.core.exceptions import RateLimitError
 from ads.core.logging import get_logger
 from ads.llm.client import BaseLLMClient, get_llm_client
 
@@ -95,6 +96,8 @@ def compose(
             markdown = client.complete(prompt, system=SYSTEM, max_tokens=4000).text.strip()
             if not markdown:
                 raise ValueError("empty report")
+        except RateLimitError:
+            raise
         except Exception as exc:  # noqa: BLE001
             log.warning("Report via LLM failed, using template: %s", exc)
             markdown = _template_report(question, plan, eda_narrative, ml_summary)

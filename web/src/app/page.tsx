@@ -93,6 +93,12 @@ export default function Home() {
       });
       if (!res.ok) throw new Error(`API returned ${res.status}`);
       const data = await res.json();
+      if (data.status === "rate_limited") {
+        setError(
+          `⏳ ${data.message || "The AI usage limit has been reached. Please try again later."}`
+        );
+        return;
+      }
       if (data.status === "error") {
         setError(`Backend error: ${data.error}`);
         return;
@@ -290,7 +296,17 @@ export default function Home() {
               </div>
             )}
 
-            {error && <div className="card p-4 text-sm text-red-600 border-red-200">{error}</div>}
+            {error && (
+              <div
+                className={`card p-4 text-sm ${
+                  error.startsWith("⏳")
+                    ? "text-amber-700 border-amber-300 bg-amber-50"
+                    : "text-red-600 border-red-200"
+                }`}
+              >
+                {error}
+              </div>
+            )}
             <div ref={endRef} />
           </div>
         </div>

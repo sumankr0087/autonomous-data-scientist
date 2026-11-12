@@ -16,8 +16,37 @@ from typing import Any
 
 from config.settings import Settings, get_settings
 
-from ads.core.exceptions import ConfigError, LLMError
+import re
+
+from ads.core.exceptions import ConfigError, LLMError, RateLimitError
 from ads.core.logging import get_logger
+
+
+def _as_rate_limit(msg: str) -> RateLimitError:
+    """Parse a provider 429 message into a friendly RateLimitError."""
+    low = msg.lower()
+    window = None
+    if "per day" in low or "perday" in low:
+        window = "day"
+    elif "per hour" in low or "perhour" in low:
+        window = "hour"
+    elif "per minute" in low or "perminute" in low:
+        window = "minute"
+
+    # Clean, human-friendly retry hint.
+    retry_after = None
+    secs = None
+    m = re.search(r"retryDelay['\"]?:?\s*['\"]?(\d+)s", msg)
+    if m:
+        secs = int(m.group(1))
+    else:
+        mm = re.search(r"retry in (?:(\d+)m)?([\d.]+)s", msg)
+        if mm:
+            secs = int(mm.group(1) or 0) * 60 + int(float(mm.group(2)))
+    if secs is not None:
+        retry_after = f"{secs // 60} min" if secs >= 60 else f"{secs} sec"
+
+    return RateLimitError("LLM usage limit reached", details=msg, retry_after=retry_after, window=window)
 
 log = get_logger(__name__)
 
@@ -132,7 +161,10 @@ class GeminiClient(BaseLLMClient):
                 ),
             )
         except Exception as exc:  # noqa: BLE001
-            raise LLMError("Gemini completion failed", details=str(exc)) from exc
+            msg = str(exc)
+            if "429" in msg or "RESOURCE_EXHAUSTED" in msg.upper() or "quota" in msg.lower():
+                raise _as_rate_limit(msg) from exc
+            raise LLMError("Gemini completion failed", details=msg) from exc
         return LLMResponse(text=resp.text or "", model=self.settings.llm_model, raw=resp)
 
 

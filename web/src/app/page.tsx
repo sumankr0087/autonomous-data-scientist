@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { FiPlay, FiSettings, FiLoader } from "react-icons/fi";
+import { FiSend, FiSettings, FiPlus, FiTrash2, FiMenu } from "react-icons/fi";
 
 const EXAMPLES = [
   "Why did sales drop in Maharashtra last quarter?",
@@ -28,24 +28,42 @@ type RunResult = {
   charts: string[];
 };
 
+type Chat = { id: string; question: string; result: RunResult; ts: number };
+
 const TABS = ["Report", "Plan", "SQL & Data", "EDA", "ML", "Chart"] as const;
+type Tab = (typeof TABS)[number];
 
 export default function Home() {
   const [apiBase, setApiBase] = useState(DEFAULT_API);
   const [showSettings, setShowSettings] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [history, setHistory] = useState<Chat[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [result, setResult] = useState<RunResult | null>(null);
-  const [tab, setTab] = useState<(typeof TABS)[number]>("Report");
+  const [tab, setTab] = useState<Tab>("Report");
+  const endRef = useRef<HTMLDivElement>(null);
 
+  // Load persisted state
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("ads_api_base");
-      if (saved) setApiBase(saved);
+      const savedApi = localStorage.getItem("ads_api_base");
+      if (savedApi) setApiBase(savedApi);
+      const savedHist = localStorage.getItem("ads_history");
+      if (savedHist) {
+        const h: Chat[] = JSON.parse(savedHist);
+        setHistory(h);
+        if (h.length) setActiveId(h[0].id);
+      }
     } catch {}
   }, []);
 
+  function persist(h: Chat[]) {
+    try {
+      localStorage.setItem("ads_history", JSON.stringify(h.slice(0, 30)));
+    } catch {}
+  }
   function saveApiBase(v: string) {
     setApiBase(v);
     try {
@@ -53,16 +71,23 @@ export default function Home() {
     } catch {}
   }
 
-  async function run() {
-    if (!question.trim()) return;
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [activeId, tab, loading]);
+
+  const active = history.find((c) => c.id === activeId) || null;
+
+  async function run(q?: string) {
+    const text = (q ?? question).trim();
+    if (!text) return;
     setLoading(true);
     setError("");
-    setResult(null);
+    setQuestion("");
     try {
       const res = await fetch(`${apiBase.replace(/\/$/, "")}/run`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question: text }),
       });
       if (!res.ok) throw new Error(`API returned ${res.status}`);
       const data = await res.json();
@@ -70,213 +95,304 @@ export default function Home() {
         setError(`Backend error: ${data.error}`);
         return;
       }
-      setResult(data);
+      const chat: Chat = { id: crypto.randomUUID(), question: text, result: data, ts: Date.now() };
+      const newHist = [chat, ...history];
+      setHistory(newHist);
+      persist(newHist);
+      setActiveId(chat.id);
       setTab("Report");
-    } catch (e) {
+    } catch {
       setError(
-        `Could not reach the backend at ${apiBase}. Make sure the FastAPI server is running and the URL is set (⚙).`
+        `Could not reach the backend at ${apiBase}. It may be waking up (free tier sleeps ~15 min — first call takes ~50s). Try again, or set the URL (⚙).`
       );
     } finally {
       setLoading(false);
     }
   }
 
+  function newChat() {
+    setActiveId(null);
+    setError("");
+    setQuestion("");
+    setSidebarOpen(false);
+  }
+  function deleteChat(id: string) {
+    const h = history.filter((c) => c.id !== id);
+    setHistory(h);
+    persist(h);
+    if (activeId === id) setActiveId(h[0]?.id ?? null);
+  }
+
   return (
-    <main className="mx-auto max-w-4xl px-5 py-10 min-h-screen flex flex-col">
-      <header className="mb-8">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold">
-              🤖 <span className="pink-text">Autonomous Data Scientist</span>
-            </h1>
-            <p className="text-sm text-neutral-600 mt-2 max-w-2xl">
-              Ask a business question — the agents generate SQL, analyse the data, train a
-              model if needed, draw a chart, and write an executive report.
-            </p>
-          </div>
+    <div className="flex h-screen overflow-hidden text-neutral-800">
+      {/* Sidebar */}
+      <aside
+        className={`${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 fixed md:static z-30 w-64 h-full bg-white/80 backdrop-blur border-r border-black/10 flex flex-col transition-transform`}
+      >
+        <div className="p-3">
           <button
-            onClick={() => setShowSettings((v) => !v)}
-            className="text-neutral-500 hover:text-violet-600 p-2"
-            aria-label="Settings"
+            onClick={newChat}
+            className="w-full flex items-center justify-center gap-2 btn-primary"
           >
-            <FiSettings size={20} />
+            <FiPlus /> New analysis
           </button>
         </div>
+        <div className="px-3 text-[0.65rem] uppercase tracking-widest text-neutral-400">History</div>
+        <div className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
+          {history.length === 0 && (
+            <p className="text-xs text-neutral-400 px-2 py-3">No analyses yet.</p>
+          )}
+          {history.map((c) => (
+            <div
+              key={c.id}
+              className={`group flex items-center gap-1 rounded-lg px-2 py-2 cursor-pointer text-sm ${
+                c.id === activeId ? "bg-violet-100 text-violet-800" : "hover:bg-black/5"
+              }`}
+              onClick={() => {
+                setActiveId(c.id);
+                setTab("Report");
+                setSidebarOpen(false);
+              }}
+            >
+              <span className="flex-1 truncate">{c.question}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteChat(c.id);
+                }}
+                className="opacity-0 group-hover:opacity-100 text-neutral-400 hover:text-red-500"
+              >
+                <FiTrash2 size={13} />
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="p-3 border-t border-black/10 text-[0.65rem] text-neutral-400">
+          Built by Suman Kumar ·{" "}
+          <a className="text-violet-600" href="https://github.com/sumankr0087/autonomous-data-scientist">
+            GitHub
+          </a>
+        </div>
+      </aside>
+
+      {sidebarOpen && (
+        <div className="fixed inset-0 bg-black/20 z-20 md:hidden" onClick={() => setSidebarOpen(false)} />
+      )}
+
+      {/* Main */}
+      <div className="flex-1 flex flex-col h-full min-w-0">
+        {/* Top bar */}
+        <header className="flex items-center justify-between px-4 py-3 border-b border-black/10 bg-white/60 backdrop-blur">
+          <div className="flex items-center gap-2 min-w-0">
+            <button className="md:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}>
+              <FiMenu size={20} />
+            </button>
+            <span className="text-xl">🤖</span>
+            <h1 className="font-bold truncate pink-text">Autonomous Data Scientist</h1>
+          </div>
+          <button onClick={() => setShowSettings((v) => !v)} className="text-neutral-500 hover:text-violet-600">
+            <FiSettings size={18} />
+          </button>
+        </header>
 
         {showSettings && (
-          <div className="card p-4 mt-4">
-            <label className="text-xs uppercase tracking-wider text-neutral-500">
-              Backend API URL
-            </label>
+          <div className="card m-3 p-3 rounded-xl">
+            <label className="text-xs uppercase tracking-wider text-neutral-500">Backend API URL</label>
             <input
               value={apiBase}
               onChange={(e) => saveApiBase(e.target.value)}
-              placeholder="https://your-api.onrender.com"
               className="mt-1 w-full bg-neutral-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
             />
-            <p className="text-xs text-neutral-500 mt-2">
-              Deploy the FastAPI backend (see repo README) and paste its URL here. Saved in your browser.
-            </p>
           </div>
         )}
-      </header>
 
-      {/* Examples */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex}
-            onClick={() => setQuestion(ex)}
-            className="text-xs card px-3 py-1.5 hover:border-violet-400 transition text-neutral-700"
-          >
-            {ex}
-          </button>
-        ))}
-      </div>
-
-      {/* Input */}
-      <div className="flex gap-2">
-        <input
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && run()}
-          placeholder="Ask a business question…"
-          className="flex-1 card px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
-        />
-        <button onClick={run} disabled={loading || !question.trim()} className="btn-primary flex items-center gap-2">
-          {loading ? <FiLoader className="animate-spin" /> : <FiPlay />}
-          {loading ? "Running…" : "Run"}
-        </button>
-      </div>
-
-      {error && <div className="mt-4 card p-4 text-sm text-red-600 border-red-200">{error}</div>}
-
-      {loading && (
-        <div className="mt-6 text-sm text-neutral-500">
-          Agents working: planning → SQL → EDA → ML → chart → report… (first run may take ~20s)
-        </div>
-      )}
-
-      {/* Results */}
-      {result && (
-        <div className="mt-6">
-          <div className="text-xs text-emerald-600 mb-3">
-            Status: {result.status}
-          </div>
-          <div className="flex gap-1 border-b border-black/10 mb-4 overflow-x-auto">
-            {TABS.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`px-3 py-2 text-sm whitespace-nowrap ${
-                  tab === t ? "text-violet-700 border-b-2 border-violet-600 font-semibold" : "text-neutral-500"
-                }`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
-
-          {tab === "Report" && (
-            <div className="prose-report card p-5 text-sm">
-              <ReactMarkdown>{result.report || "_No report_"}</ReactMarkdown>
-            </div>
-          )}
-
-          {tab === "Plan" && (
-            <div className="card p-5 text-sm">
-              <p className="text-neutral-600 mb-2">
-                <strong>Rationale:</strong> {result.rationale}
-              </p>
-              <p className="text-neutral-600 mb-3">
-                <strong>Needs ML:</strong> {String(result.needs_ml)}
-              </p>
-              <ol className="list-decimal pl-5 space-y-1">
-                {result.plan?.map((s, i) => <li key={i}>{s}</li>)}
-              </ol>
-            </div>
-          )}
-
-          {tab === "SQL & Data" && (
-            <div className="card p-5">
-              <pre className="text-xs overflow-auto bg-neutral-50 p-3 rounded-lg">{result.sql}</pre>
-              <p className="text-xs text-neutral-500 my-2">{result.row_count} rows</p>
-              {result.rows?.length > 0 && (
-                <div className="overflow-auto max-h-80">
-                  <table className="text-xs w-full">
-                    <thead>
-                      <tr>
-                        {Object.keys(result.rows[0]).map((c) => (
-                          <th key={c} className="text-left p-1.5 border-b font-semibold">{c}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {result.rows.slice(0, 50).map((r, i) => (
-                        <tr key={i} className="border-b">
-                          {Object.values(r).map((v, j) => (
-                            <td key={j} className="p-1.5">{String(v)}</td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+        {/* Conversation / results */}
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="max-w-3xl mx-auto">
+            {!active && !loading && (
+              <div className="text-center mt-10">
+                <h2 className="text-2xl font-bold mb-2 pink-text">Ask a business question</h2>
+                <p className="text-neutral-500 text-sm mb-6">
+                  The agents generate SQL, analyse the data, train a model if needed, draw a chart,
+                  and write an executive report.
+                </p>
+                <div className="flex flex-col gap-2 max-w-xl mx-auto">
+                  {EXAMPLES.map((ex) => (
+                    <button
+                      key={ex}
+                      onClick={() => run(ex)}
+                      className="card rounded-xl px-4 py-3 text-sm text-left hover:border-violet-400 transition"
+                    >
+                      {ex}
+                    </button>
+                  ))}
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
 
-          {tab === "EDA" && (
-            <div className="prose-report card p-5 text-sm">
-              <ReactMarkdown>{result.eda || "_No EDA_"}</ReactMarkdown>
-            </div>
-          )}
+            {active && (
+              <div className="space-y-4">
+                {/* user bubble */}
+                <div className="flex justify-end">
+                  <div className="bg-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[85%]">
+                    {active.question}
+                  </div>
+                </div>
 
-          {tab === "ML" && (
-            <div className="card p-5 text-sm">
-              {result.ml?.ran ? (
-                <>
-                  <p className="mb-3">{result.ml.summary}</p>
-                  {result.ml.importances && (
-                    <table className="text-xs w-full">
-                      <thead>
-                        <tr><th className="text-left p-1.5 border-b">Feature</th><th className="text-left p-1.5 border-b">Importance</th></tr>
-                      </thead>
-                      <tbody>
-                        {result.ml.importances.map((d, i) => (
-                          <tr key={i} className="border-b"><td className="p-1.5">{d.feature}</td><td className="p-1.5">{d.importance}</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  )}
-                </>
-              ) : (
-                <p className="text-neutral-500">{result.ml?.summary || "ML was not required for this question."}</p>
-              )}
-            </div>
-          )}
+                {/* assistant answer */}
+                <div className="card rounded-2xl rounded-bl-sm p-4">
+                  <div className="flex gap-1 border-b border-black/10 mb-4 overflow-x-auto">
+                    {TABS.map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => setTab(t)}
+                        className={`px-3 py-2 text-sm whitespace-nowrap ${
+                          tab === t
+                            ? "text-violet-700 border-b-2 border-violet-600 font-semibold"
+                            : "text-neutral-500"
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                  <ResultTab tab={tab} r={active.result} />
+                </div>
+              </div>
+            )}
 
-          {tab === "Chart" && (
-            <div className="card p-5">
-              {result.charts?.length > 0 ? (
-                result.charts.map((c, i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={i} src={c} alt="chart" className="w-full rounded-lg" />
-                ))
-              ) : (
-                <p className="text-sm text-neutral-500">No chart generated.</p>
-              )}
-            </div>
-          )}
+            {loading && (
+              <div className="flex justify-start mt-4">
+                <div className="card rounded-2xl px-4 py-3 text-sm text-neutral-500">
+                  <span className="inline-block animate-pulse">
+                    Agents working: planning → SQL → EDA → ML → chart → report…
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {error && <div className="card p-4 mt-4 text-sm text-red-600 border-red-200">{error}</div>}
+            <div ref={endRef} />
+          </div>
         </div>
-      )}
 
-      <footer className="mt-auto pt-10 border-t border-black/10 text-center text-xs text-neutral-500">
-        Built by Suman Kumar ·{" "}
-        <a className="text-violet-600" href="https://github.com/sumankr0087/autonomous-data-scientist">
-          GitHub
-        </a>
-      </footer>
-    </main>
+        {/* Input bar (bottom) */}
+        <div className="border-t border-black/10 bg-white/70 backdrop-blur px-4 py-3">
+          <div className="max-w-3xl mx-auto flex gap-2">
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && !loading && run()}
+              placeholder="Ask a business question…"
+              className="flex-1 card rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+            />
+            <button
+              onClick={() => run()}
+              disabled={loading || !question.trim()}
+              className="btn-primary !rounded-full !px-4 flex items-center gap-2"
+            >
+              <FiSend />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ResultTab({ tab, r }: { tab: Tab; r: RunResult }) {
+  if (tab === "Report")
+    return (
+      <div className="prose-report text-sm">
+        <ReactMarkdown>{r.report || "_No report_"}</ReactMarkdown>
+      </div>
+    );
+  if (tab === "Plan")
+    return (
+      <div className="text-sm">
+        <p className="text-neutral-600 mb-2">
+          <strong>Rationale:</strong> {r.rationale}
+        </p>
+        <p className="text-neutral-600 mb-3">
+          <strong>Needs ML:</strong> {String(r.needs_ml)}
+        </p>
+        <ol className="list-decimal pl-5 space-y-1">
+          {r.plan?.map((s, i) => <li key={i}>{s}</li>)}
+        </ol>
+      </div>
+    );
+  if (tab === "SQL & Data")
+    return (
+      <div>
+        <pre className="text-xs overflow-auto bg-neutral-50 p-3 rounded-lg">{r.sql || "-- no SQL"}</pre>
+        <p className="text-xs text-neutral-500 my-2">{r.row_count} rows</p>
+        {r.rows?.length > 0 && (
+          <div className="overflow-auto max-h-80">
+            <table className="text-xs w-full">
+              <thead>
+                <tr>
+                  {Object.keys(r.rows[0]).map((c) => (
+                    <th key={c} className="text-left p-1.5 border-b font-semibold">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {r.rows.slice(0, 50).map((row, i) => (
+                  <tr key={i} className="border-b">
+                    {Object.values(row).map((v, j) => (
+                      <td key={j} className="p-1.5">{String(v)}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  if (tab === "EDA")
+    return (
+      <div className="prose-report text-sm">
+        <ReactMarkdown>{r.eda || "_No EDA_"}</ReactMarkdown>
+      </div>
+    );
+  if (tab === "ML")
+    return r.ml?.ran ? (
+      <div className="text-sm">
+        <p className="mb-3">{r.ml.summary}</p>
+        {r.ml.importances && (
+          <table className="text-xs w-full">
+            <thead>
+              <tr>
+                <th className="text-left p-1.5 border-b">Feature</th>
+                <th className="text-left p-1.5 border-b">Importance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {r.ml.importances.map((d, i) => (
+                <tr key={i} className="border-b">
+                  <td className="p-1.5">{d.feature}</td>
+                  <td className="p-1.5">{d.importance}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    ) : (
+      <p className="text-sm text-neutral-500">{r.ml?.summary || "ML was not required."}</p>
+    );
+  // Chart
+  return r.charts?.length > 0 ? (
+    <div>
+      {r.charts.map((c, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key={i} src={c} alt="chart" className="w-full rounded-lg" />
+      ))}
+    </div>
+  ) : (
+    <p className="text-sm text-neutral-500">No chart generated.</p>
   );
 }

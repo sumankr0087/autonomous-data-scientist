@@ -99,8 +99,8 @@ def compose(
             log.warning("Report via LLM failed, using template: %s", exc)
             markdown = _template_report(question, plan, eda_narrative, ml_summary)
 
-    if charts:
-        markdown += "\n\n## Charts\n" + "\n".join(f"- `{c}`" for c in charts)
+    # Note: chart images are returned separately (the UI shows them in a Chart
+    # tab), so we do NOT embed raw server file paths into the report text.
 
     path = None
     try:

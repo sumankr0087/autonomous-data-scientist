@@ -119,12 +119,14 @@ class GeminiClient(BaseLLMClient):
     def complete(self, prompt: str, *, system: str | None = None, **kwargs: Any) -> LLMResponse:
         from google.genai import types
 
+        # Some models (e.g. gemini-2.5-flash-lite on v1beta) reject a separate
+        # system_instruction, so fold it into the prompt for portability.
+        contents = f"{system}\n\n{prompt}" if system else prompt
         try:
             resp = self._client.models.generate_content(
                 model=self.settings.llm_model,
-                contents=prompt,
+                contents=contents,
                 config=types.GenerateContentConfig(
-                    system_instruction=system or None,
                     temperature=kwargs.get("temperature", self.settings.llm_temperature),
                     max_output_tokens=kwargs.get("max_tokens", self.settings.llm_max_tokens),
                 ),

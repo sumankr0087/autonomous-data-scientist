@@ -411,6 +411,23 @@ function AboutModal({ onClose }: { onClose: () => void }) {
           ))}
         </ul>
 
+        <h3 className="font-semibold text-sm mb-2">Choose your AI model</h3>
+        <p className="text-sm text-neutral-600 leading-relaxed mb-4">
+          Use the <strong>AI model</strong> dropdown under the question box to switch the
+          model that powers your analysis:
+        </p>
+        <ul className="space-y-2 mb-4 text-sm">
+          <li>
+            <span className="font-semibold text-violet-700">Groq · GPT-OSS 120B / 20B</span>
+            <span className="text-neutral-600"> — fast, with a generous free tier (default).
+            120B is stronger; 20B is fastest.</span>
+          </li>
+          <li>
+            <span className="font-semibold text-violet-700">Google Gemini · Flash-Lite</span>
+            <span className="text-neutral-600"> — Google&apos;s model (smaller free daily limit).</span>
+          </li>
+        </ul>
+
         <h3 className="font-semibold text-sm mb-2">What it can answer</h3>
         <p className="text-sm text-neutral-600 leading-relaxed mb-2">
           It runs on a sample retail <strong>sales dataset</strong> covering 12 Indian states across

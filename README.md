@@ -129,7 +129,10 @@ autonomous-data-scientist/
   Recommended Actions / Confidence & Caveats.
 - **Advanced agent patterns** — reflection, tool-calling, run **memory**
   (history), and a **human-in-the-loop approval** gate.
-- **Provider-agnostic LLM** — Gemini (default), OpenAI or Anthropic via config.
+- **Provider-agnostic LLM + in-UI model switcher** — pick the model from a dropdown
+  under the question box. Supported: **Groq** (GPT-OSS 120B / 20B — fast, generous
+  free tier, default), **Google Gemini** (Flash-Lite), and OpenAI / Anthropic via
+  config. Only models with a server-side key appear.
 - **Production engineering** — typed config, structured logging (console + rotating
   file/JSON), a custom exception hierarchy, and a pytest suite.
 - **ChatGPT-style web UI** — threaded conversations, sidebar history, tabbed
@@ -141,7 +144,7 @@ autonomous-data-scientist/
 | Area | Tech |
 |---|---|
 | **Agent orchestration** | LangGraph, LangChain |
-| **LLM** | Google Gemini (`google-genai`), OpenAI, Anthropic (pluggable) |
+| **LLM** | Groq (GPT-OSS 120B/20B), Google Gemini (`google-genai`), OpenAI, Anthropic — switchable in the UI |
 | **Backend / API** | Python 3.11, FastAPI, Uvicorn |
 | **Database** | DuckDB |
 | **Data / ML** | pandas, NumPy, scikit-learn |
@@ -314,7 +317,7 @@ The app is **provider-agnostic**. Configure keys on the backend; the UI shows a
 **model dropdown** with whichever providers have a key set:
 
 - **Google Gemini** — set `GOOGLE_API_KEY` (free tier, lower daily limit)
-- **Groq** — set `GROQ_API_KEY` (free tier, **much more generous & very fast**, Llama models)
+- **Groq** — set `GROQ_API_KEY` (free tier, **much more generous & very fast** — GPT-OSS & other models)
 
 #### How to get a free Groq API key
 1. Go to **https://console.groq.com** and sign in (Google/GitHub login works).
@@ -322,7 +325,7 @@ The app is **provider-agnostic**. Configure keys on the backend; the UI shows a
 3. Copy the key (starts with `gsk_…`) — you only see it once.
 4. Add it to the backend: in Render → service → **Environment** →
    `GROQ_API_KEY = gsk_…` → **Save** (redeploys). Locally, put it in `.env`.
-5. Reload the app → pick **Groq · Llama 3.3 70B** from the model dropdown and chat.
+5. Reload the app → pick **Groq · GPT-OSS 120B** from the model dropdown (under the question) and chat.
 
 ### 1. Backend → Hugging Face Spaces (free) — FastAPI
 1. Create a new **Space** at <https://huggingface.co/new-space> → SDK **Docker** →

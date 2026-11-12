@@ -66,6 +66,32 @@ def examples() -> dict:
     return {"examples": EXAMPLES}
 
 
+@app.get("/diag")
+def diag() -> dict:
+    """Diagnostics: is the LLM reachable? Never returns the key itself."""
+    import os
+
+    from config.settings import get_settings
+
+    s = get_settings()
+    info = {
+        "provider": s.llm_provider,
+        "model": s.llm_model,
+        "google_api_key_env_present": bool(os.getenv("GOOGLE_API_KEY")),
+        "active_api_key_present": bool(s.active_api_key),
+    }
+    try:
+        from ads.llm.client import get_llm_client
+
+        resp = get_llm_client().complete("Reply with: OK", system="diagnostic")
+        info["llm_call"] = "ok"
+        info["llm_reply"] = (resp.text or "")[:40]
+    except Exception as exc:  # noqa: BLE001
+        info["llm_call"] = "failed"
+        info["error"] = f"{type(exc).__name__}: {exc}"
+    return info
+
+
 def _charts_as_data_urls(paths: list[str]) -> list[str]:
     out: list[str] = []
     for c in paths or []:

@@ -1,14 +1,3 @@
-<!-- Hugging Face Spaces metadata (used when this repo is deployed as a Docker Space) -->
----
-title: Autonomous Data Scientist API
-emoji: 🤖
-colorFrom: purple
-colorTo: blue
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # 🤖 Autonomous Data Scientist Agent
 
 A production-grade, multi-agent AI system that turns a plain-English **business

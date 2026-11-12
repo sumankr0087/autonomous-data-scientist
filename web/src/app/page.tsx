@@ -41,6 +41,7 @@ export default function Home() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [tab, setTab] = useState<Tab>("Report");
   const endRef = useRef<HTMLDivElement>(null);
@@ -83,6 +84,8 @@ export default function Home() {
     setLoading(true);
     setError("");
     setQuestion("");
+    setPending(text);
+    setActiveId(null);
     try {
       const res = await fetch(`${apiBase.replace(/\/$/, "")}/run`, {
         method: "POST",
@@ -107,6 +110,7 @@ export default function Home() {
       );
     } finally {
       setLoading(false);
+      setPending(null);
     }
   }
 
@@ -211,7 +215,7 @@ export default function Home() {
         {/* Conversation / results */}
         <div className="flex-1 overflow-y-auto px-4 py-6">
           <div className="max-w-3xl mx-auto">
-            {!active && !loading && (
+            {!active && !loading && !pending && (
               <div className="text-center mt-10">
                 <h2 className="text-2xl font-bold mb-2 pink-text">Ask a business question</h2>
                 <p className="text-neutral-500 text-sm mb-6">
@@ -264,11 +268,20 @@ export default function Home() {
             )}
 
             {loading && (
-              <div className="flex justify-start mt-4">
-                <div className="card rounded-2xl px-4 py-3 text-sm text-neutral-500">
-                  <span className="inline-block animate-pulse">
-                    Agents working: planning → SQL → EDA → ML → chart → report…
-                  </span>
+              <div className="space-y-4">
+                {pending && (
+                  <div className="flex justify-end">
+                    <div className="bg-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[85%]">
+                      {pending}
+                    </div>
+                  </div>
+                )}
+                <div className="flex justify-start">
+                  <div className="card rounded-2xl rounded-bl-sm px-4 py-3 text-sm text-neutral-500">
+                    <span className="inline-block animate-pulse">
+                      Agents working: planning → SQL → EDA → ML → chart → report…
+                    </span>
+                  </div>
                 </div>
               </div>
             )}

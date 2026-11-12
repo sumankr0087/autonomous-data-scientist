@@ -113,10 +113,43 @@ autonomous-data-scientist/
 └── tests/                  # pytest suite
 ```
 
-### Tech stack
+---
 
-LangGraph · LangChain · OpenAI / Anthropic · DuckDB · pandas · scikit-learn ·
-matplotlib / Plotly · Streamlit · Pydantic · Rich.
+## 🚀 Features
+
+- **Natural-language → full analysis** — ask in plain English; agents do the rest.
+- **Multi-agent pipeline (LangGraph):** Planner → SQL → EDA → ML → Viz → Report.
+- **Text-to-SQL with self-correction** — generates DuckDB SQL, validates it
+  (read-only guardrails), and retries by feeding errors back to the LLM.
+- **Automated EDA** — summary stats, group comparisons and IQR anomaly detection.
+- **Baseline ML** — trains a RandomForest and reports feature-importance drivers
+  (only when the question needs it).
+- **Auto visualization** — matplotlib chart of the top movers.
+- **Executive report** — LLM-written Answer / Key Findings / Likely Cause /
+  Recommended Actions / Confidence & Caveats.
+- **Advanced agent patterns** — reflection, tool-calling, run **memory**
+  (history), and a **human-in-the-loop approval** gate.
+- **Provider-agnostic LLM** — Gemini (default), OpenAI or Anthropic via config.
+- **Production engineering** — typed config, structured logging (console + rotating
+  file/JSON), a custom exception hierarchy, and a pytest suite.
+- **ChatGPT-style web UI** — threaded conversations, sidebar history, tabbed
+  results, an About panel, and a configurable backend URL.
+- **REST API** (FastAPI) + **CI/CD** (GitHub Actions) + one-command deploy.
+
+## 🧰 Technologies used
+
+| Area | Tech |
+|---|---|
+| **Agent orchestration** | LangGraph, LangChain |
+| **LLM** | Google Gemini (`google-genai`), OpenAI, Anthropic (pluggable) |
+| **Backend / API** | Python 3.11, FastAPI, Uvicorn |
+| **Database** | DuckDB |
+| **Data / ML** | pandas, NumPy, scikit-learn |
+| **Visualization** | matplotlib |
+| **Config / logging** | pydantic-settings, Rich, python-dotenv |
+| **Frontend** | Next.js 14, React 18, TypeScript, Tailwind CSS, react-markdown |
+| **Testing** | pytest |
+| **Deploy** | GitHub Pages (frontend), Render (API), Docker, GitHub Actions |
 
 ---
 
@@ -137,7 +170,7 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
 - [x] **Step 7 — ML agent:** baseline RandomForest, metrics + feature importances (runs when needs_ml).
 - [x] **Step 8 — Viz + Report agents:** matplotlib charts + LLM executive report saved to artifacts/
 - [x] **Step 9 — Advanced:** reflection, run memory, human-approval gate.
-- [x] **Step 10 — Streamlit UI** (app.py).
+- [x] **Step 10 — Web UI** (Next.js + FastAPI API).
 - [ ] **Step 11 — Tests, Docker, CI.**
 
 ---
@@ -214,14 +247,16 @@ command prints the SQL, EDA findings and final report. Test: `pytest -k ml_repor
 `enable_human_approval`; the CLI prompts interactively (`--yes` to skip), the UI
 auto-approves. Test: `pytest -k memory`.
 
-### ✅ Step 10 — Streamlit UI *(done)*
-`app.py` — question box, example buttons, seed button, recent-runs sidebar, and
-tabbed results (Report / Plan / SQL & Data / EDA / ML / Chart). Run: `streamlit run app.py`.
+### ✅ Step 10 — Web UI *(done)*
+`src/ads/api.py` (FastAPI `/run`, `/health`, `/diag`) + a **Next.js** app in `web/`:
+ChatGPT-style threaded conversations, sidebar history, tabbed results
+(Report / Plan / SQL & Data / EDA / ML / Chart), an About panel, and a
+configurable backend URL.
 
 ### ✅ Step 11 — Infra + deploy *(done)*
-`Dockerfile`, `.streamlit/config.toml`, `.github/workflows/ci.yml` (offline pytest),
-a static showcase in `site/` deployed to GitHub Pages via
-`.github/workflows/pages.yml`, and Streamlit-Cloud deploy steps below.
+`Dockerfile`, `.github/workflows/ci.yml` (offline pytest), and
+`.github/workflows/pages.yml` which builds the Next.js app and publishes it to
+GitHub Pages. Backend deploys to Render via `render.yaml`.
 
 ---
 
@@ -299,12 +334,6 @@ The `web/` Next.js app is built & published by `.github/workflows/pages.yml` →
   build, **or** by opening the site and entering the backend URL in the ⚙ settings
   (saved in your browser).
 
-### Also available: Streamlit (one-click, all-in-one)
-`app.py` is a complete Streamlit UI — deploy on
-[Streamlit Community Cloud](https://share.streamlit.io) (main file `app.py`, add
-`GOOGLE_API_KEY` to Secrets) for a single `*.streamlit.app` URL with no separate
-backend.
-
 ### Run locally
 
 ```bash
@@ -317,11 +346,11 @@ uvicorn api:app --reload                 # http://localhost:8000
 cd web && npm install && npm run dev      # http://localhost:3000
 ```
 
-### Docker (Streamlit variant)
+### Docker (backend API)
 
 ```bash
 docker build -t ads .
-docker run -p 8501:8501 -e GOOGLE_API_KEY=your-key ads
+docker run -p 7860:7860 -e GOOGLE_API_KEY=your-key ads   # API on :7860
 ```
 
 ## 📄 License

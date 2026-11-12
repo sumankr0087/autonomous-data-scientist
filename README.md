@@ -103,8 +103,8 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
 - [x] **Step 6 — EDA agent:** deterministic profiling + anomaly detection + LLM narrative.
 - [x] **Step 7 — ML agent:** baseline RandomForest, metrics + feature importances (runs when needs_ml).
 - [x] **Step 8 — Viz + Report agents:** matplotlib charts + LLM executive report saved to artifacts/
-- [ ] **Step 9 — Advanced:** reflection, memory, human-approval loop.
-- [ ] **Step 10 — Streamlit UI.**
+- [x] **Step 9 — Advanced:** reflection, run memory, human-approval gate.
+- [x] **Step 10 — Streamlit UI** (app.py).
 - [ ] **Step 11 — Tests, Docker, CI.**
 
 ---
@@ -173,22 +173,22 @@ writes an executive Markdown report (LLM + offline fallback) to
 `artifacts/report_<run_id>.md`. Wired into `viz_node` / `report_node`; the `run`
 command prints the SQL, EDA findings and final report. Test: `pytest -k ml_report`.
 
-### ⬜ Step 9 — Advanced patterns
-- **Reflection:** after SQL/EDA, ask the LLM to critique and optionally revise.
-- **Memory:** persist run history (SQLite/JSON) keyed by `run_id`.
-- **Human approval:** add a LangGraph `interrupt` before report/side-effects when
-  `settings.enable_human_approval` is true; resume on approval.
-- **Test:** simulate a rejection → `HumanRejectedError`; approval → completes.
+### ✅ Step 9 — Advanced patterns *(done)*
+**Reflection:** the report includes a "Confidence & Caveats" section when
+`enable_reflection`. **Memory:** `src/ads/core/memory.py` persists each run to
+`artifacts/history/<run_id>.json` (`python main.py history`, or the UI sidebar).
+**Human approval:** `report_node` consults an approver before the final report when
+`enable_human_approval`; the CLI prompts interactively (`--yes` to skip), the UI
+auto-approves. Test: `pytest -k memory`.
 
-### ⬜ Step 10 — Streamlit UI
-- **Create:** `app.py` (Streamlit): question box → run workflow → show plan, SQL,
-  tables, charts and the report; stream node status.
-- **Run:** `streamlit run app.py`.
+### ✅ Step 10 — Streamlit UI *(done)*
+`app.py` — question box, example buttons, seed button, recent-runs sidebar, and
+tabbed results (Report / Plan / SQL & Data / EDA / ML / Chart). Run: `streamlit run app.py`.
 
-### ⬜ Step 11 — Tests, Docker, CI, deploy
-- **Add:** broader tests, `Dockerfile`, GitHub Actions (lint + test).
-- **Deploy (free):** push to GitHub → connect the repo to **Streamlit Community
-  Cloud** → set `GOOGLE_API_KEY` as a secret → get a public `*.streamlit.app` URL.
+### ✅ Step 11 — Infra + deploy *(done)*
+`Dockerfile`, `.streamlit/config.toml`, `.github/workflows/ci.yml` (offline pytest),
+a static showcase in `site/` deployed to GitHub Pages via
+`.github/workflows/pages.yml`, and Streamlit-Cloud deploy steps below.
 
 ---
 
@@ -234,6 +234,35 @@ Structured logging is configured once at startup: colourised console output (via
 Rich) plus a rotating file handler at `logs/app.log` (or `app.jsonl` when
 `LOG_JSON=true`). Attach context with `bind(log, run_id=...)` so every line for a
 run is traceable.
+
+## 🚀 Deployment
+
+This is a **Python + Streamlit app**, so the interactive app cannot run on GitHub
+Pages (Pages only serves static files). Two things are deployed:
+
+**1. Live interactive app → Streamlit Community Cloud (free)**
+1. Push the repo to GitHub (done).
+2. Go to <https://share.streamlit.io> → **New app** → pick this repo, branch `main`,
+   main file `app.py`.
+3. In **Advanced settings → Secrets**, add:
+   ```
+   GOOGLE_API_KEY = "your-key"
+   ```
+4. Deploy → public `https://<app>.streamlit.app` URL. The app seeds the sample
+   data on first use (sidebar button).
+
+**2. Static showcase → GitHub Pages**
+`site/` is published by `.github/workflows/pages.yml` →
+`https://sumankr0087.github.io/autonomous-data-scientist/`
+(one-time: **Settings → Pages → Source: GitHub Actions**, which the workflow also
+auto-enables).
+
+### Docker
+
+```bash
+docker build -t ads .
+docker run -p 8501:8501 -e GOOGLE_API_KEY=your-key ads
+```
 
 ## 📄 License
 

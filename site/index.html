@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Autonomous Data Scientist Agent</title>
+<meta name="description" content="A multi-agent AI system that turns a business question into SQL, analysis, ML, a chart and an executive report." />
+<style>
+  :root{--bg:#0b0b14;--card:#15151f;--muted:#9aa0b4;--text:#e8e8f0;--accent:#8b5cf6;--accent2:#22d3ee;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:ui-monospace,"JetBrains Mono",Menlo,monospace;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+  header{padding:72px 0 40px;text-align:center}
+  h1{font-size:2.4rem;margin:0 0 10px;background:linear-gradient(90deg,#a78bfa,#22d3ee);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);max-width:620px;margin:0 auto}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px 0}
+  .chip{font-size:.75rem;padding:4px 10px;border:1px solid rgba(139,92,246,.4);border-radius:999px;color:#c4b5fd}
+  .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+  a.btn{display:inline-block;padding:11px 20px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.85rem}
+  .primary{background:linear-gradient(90deg,#7c3aed,#22d3ee);color:#fff}
+  .ghost{border:1px solid rgba(255,255,255,.18);color:var(--text)}
+  section{margin:40px 0}
+  h2{font-size:1.3rem;border-left:3px solid var(--accent);padding-left:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px}
+  .card h3{margin:.2rem 0;font-size:1rem}
+  .card p{color:var(--muted);font-size:.85rem;margin:.3rem 0 0}
+  pre{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;overflow:auto;font-size:.8rem}
+  img{max-width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+  .report{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;font-size:.9rem}
+  .report h3{color:#c4b5fd}
+  footer{color:var(--muted);text-align:center;padding:40px 0;font-size:.8rem}
+  code{color:#7dd3fc}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🤖 Autonomous Data Scientist</h1>
+    <p class="sub">A multi-agent AI system that turns a plain-English business question into
+    SQL, exploratory analysis, a trained model, a chart and an executive report — autonomously.</p>
+    <div class="chips">
+      <span class="chip">LangGraph</span><span class="chip">Gemini</span>
+      <span class="chip">DuckDB</span><span class="chip">RAG / Agents</span>
+      <span class="chip">scikit-learn</span><span class="chip">Streamlit</span>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/sumankr0087/autonomous-data-scientist">View on GitHub</a>
+      <a class="btn ghost" id="liveapp" href="#live">Live App</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="grid">
+      <div class="card"><h3>1 · Planner</h3><p>Decomposes the question &amp; decides which steps are needed.</p></div>
+      <div class="card"><h3>2 · SQL agent</h3><p>Writes &amp; runs DuckDB SQL, self-correcting on errors.</p></div>
+      <div class="card"><h3>3 · EDA agent</h3><p>Trends, group comparisons &amp; anomaly detection.</p></div>
+      <div class="card"><h3>4 · ML agent</h3><p>Baseline model + feature-importance drivers (when needed).</p></div>
+      <div class="card"><h3>5 · Viz agent</h3><p>Charts of the key movers.</p></div>
+      <div class="card"><h3>6 · Report agent</h3><p>Executive report with actions &amp; caveats.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Sample run</h2>
+    <p class="sub" style="margin:0 0 14px">Question: <code>“Why did sales drop in Maharashtra last quarter?”</code></p>
+    <img src="assets/sample_chart.png" alt="Revenue change by product and channel" />
+    <div class="report" style="margin-top:16px">
+      <h3>Executive Report (excerpt)</h3>
+      <p><strong>Answer.</strong> Maharashtra sales fell ₹2.51M (−52.4%) last quarter, driven by a
+      collapse in Electronics — Online Laptop &amp; Smartphone sales fell to zero and Retail Laptop
+      dropped 91%. Partner-channel Laptop sales grew 82% but could not offset the losses.</p>
+      <p><strong>Likely cause.</strong> A failure in the online &amp; retail channels for key Electronics
+      products (stockout / platform outage / halted sales).</p>
+      <p><strong>Recommended actions.</strong> Investigate the online/retail channel failure; replicate
+      the partner-channel success; review Electronics strategy; implement corrective measures.</p>
+    </div>
+  </section>
+
+  <section id="live">
+    <h2>Run it yourself</h2>
+    <p class="sub" style="margin:0 0 10px">This is a Python app, so it runs on Streamlit (not on static
+    hosting). Clone the repo and launch:</p>
+    <pre>git clone https://github.com/sumankr0087/autonomous-data-scientist
+cd autonomous-data-scientist
+pip install -r requirements.txt
+# add your free Google AI Studio key to .env  (GOOGLE_API_KEY=...)
+python main.py seed
+streamlit run app.py</pre>
+  </section>
+
+  <footer>Built by Suman Kumar · <a style="color:#c4b5fd" href="https://github.com/sumankr0087">github.com/sumankr0087</a></footer>
+</div>
+</body>
+</html>

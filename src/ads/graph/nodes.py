@@ -118,9 +118,24 @@ def viz_node(state: GraphState) -> dict:
 
 def report_node(state: GraphState) -> dict:
     """Compose the executive report from everything the pipeline produced."""
+    from config.settings import get_settings
+
     from ads.agents.report_agent import compose
+    from ads.graph.workflow import get_approver
 
     rlog = _run_log(state)
+
+    # Human-in-the-loop gate before producing the final report.
+    if get_settings().enable_human_approval:
+        approver = get_approver()
+        if approver is not None and not approver(state):
+            rlog.warning("[report_agent] rejected by human approver")
+            return {
+                "status": "rejected",
+                "errors": ["report_agent: rejected by human approver"],
+                "steps_completed": [AgentName.REPORT.value],
+            }
+
     rlog.info("[report_agent] composing report")
     eda = (state.get("eda") or {}).get("narrative", "")
     ml = (state.get("ml") or {}).get("summary", "")

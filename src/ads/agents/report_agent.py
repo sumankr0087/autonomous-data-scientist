@@ -49,8 +49,12 @@ Structure the report as Markdown with these sections:
 ## Key Findings (bullets, quantified)
 ## Likely Cause / Drivers
 ## Recommended Actions (2-4 bullets)
-
+{reflection}
 Be specific and use the numbers from the findings."""
+
+REFLECTION_SECTION = (
+    "## Confidence & Caveats (1-2 bullets: how confident, and any data limitations)\n"
+)
 
 
 def _template_report(question: str, plan, eda: str, ml: str) -> str:
@@ -77,12 +81,16 @@ def compose(
         markdown = _template_report(question, plan, eda_narrative, ml_summary)
     else:
         try:
+            from config.settings import get_settings
+
             client = llm or get_llm_client()
+            reflection = REFLECTION_SECTION if get_settings().enable_reflection else ""
             prompt = PROMPT.format(
                 question=question,
                 plan="\n".join(f"- {s}" for s in (plan or [])) or "(none)",
                 eda=eda_narrative or "(none)",
                 ml=ml_summary or "(not applicable)",
+                reflection=reflection,
             )
             markdown = client.complete(prompt, system=SYSTEM, max_tokens=4000).text.strip()
             if not markdown:

@@ -11,6 +11,7 @@ human-approval interrupt before side-effecting steps.
 from __future__ import annotations
 
 import uuid
+from typing import Callable
 
 from langgraph.graph import END, START, StateGraph
 
@@ -51,18 +52,46 @@ def build_workflow():
     return g.compile()
 
 
-def run_workflow(question: str, run_id: str | None = None) -> GraphState:
+# Human-in-the-loop approver, consulted before the final report when
+# `enable_human_approval` is on. Defaults to auto-approve.
+_APPROVER: Callable[[GraphState], bool] | None = None
+
+
+def set_approver(func: Callable[[GraphState], bool] | None) -> None:
+    """Register (or clear) the human-approval callback used by `report_node`."""
+    global _APPROVER
+    _APPROVER = func
+
+
+def get_approver() -> Callable[[GraphState], bool] | None:
+    return _APPROVER
+
+
+def run_workflow(
+    question: str,
+    run_id: str | None = None,
+    approver: Callable[[GraphState], bool] | None = None,
+) -> GraphState:
     """Execute the full workflow for a business question."""
     run_id = run_id or uuid.uuid4().hex[:8]
     rlog = bind(log, run_id=run_id)
     rlog.info("Starting workflow for question: %s", question)
 
-    graph = build_workflow()
-    result: GraphState = graph.invoke(initial_state(question, run_id))
+    set_approver(approver)
+    try:
+        graph = build_workflow()
+        result: GraphState = graph.invoke(initial_state(question, run_id))
+    finally:
+        set_approver(None)
 
     rlog.info(
         "Workflow finished: status=%s, steps=%s",
         result.get("status"),
         result.get("steps_completed"),
     )
+
+    # Memory: persist the completed run.
+    from ads.core.memory import save_run
+
+    save_run(dict(result))
     return result

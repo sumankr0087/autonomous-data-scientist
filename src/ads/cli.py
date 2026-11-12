@@ -82,9 +82,20 @@ def cmd_schema(args: argparse.Namespace) -> int:
 
 def cmd_run(args: argparse.Namespace) -> int:
     """Run the agent workflow against a business question."""
+    import sys as _sys
+
+    from config.settings import get_settings
     from ads.graph.workflow import run_workflow
 
-    result = run_workflow(args.question)
+    approver = None
+    if get_settings().enable_human_approval and not args.yes and _sys.stdin.isatty():
+        def approver(state):  # noqa: ANN001
+            print("\n--- Human approval ---")
+            print(f"Plan: {state.get('plan')}")
+            print(f"SQL rows: {state.get('row_count')}")
+            return input("Proceed to generate the report? [Y/n] ").strip().lower() in ("", "y", "yes")
+
+    result = run_workflow(args.question, approver=approver)
     print("\n" + "=" * 60)
     print(f"Question : {args.question}")
     print(f"Status   : {result.get('status')}")
@@ -125,10 +136,25 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("seed", help="Generate the sample dataset into DuckDB.")
     sub.add_parser("schema", help="Print the warehouse schema.")
 
-    run_p = sub.add_parser("run", help="Answer a business question (coming in later steps).")
+    sub.add_parser("history", help="List recent runs from memory.")
+
+    run_p = sub.add_parser("run", help="Answer a business question end to end.")
     run_p.add_argument("question", help="A natural-language business question.")
+    run_p.add_argument("--yes", action="store_true", help="Skip human approval prompt.")
 
     return parser
+
+
+def cmd_history(args: argparse.Namespace) -> int:
+    from ads.core.memory import list_runs
+
+    runs = list_runs(20)
+    if not runs:
+        print("No runs yet.")
+        return 0
+    for r in runs:
+        print(f"- [{r.get('status')}] {r.get('question')}  ({r.get('run_id')})")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -145,6 +171,8 @@ def main(argv: list[str] | None = None) -> int:
             return cmd_seed(args)
         if args.command == "schema":
             return cmd_schema(args)
+        if args.command == "history":
+            return cmd_history(args)
         if args.command == "run":
             return cmd_run(args)
         parser.print_help()

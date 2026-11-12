@@ -19,21 +19,43 @@ executive report** — with no SQL, Python or ML knowledge required from the use
 > queries the warehouse, analyses trends, detects anomalies, trains models,
 > generates charts, and writes a business-ready report.
 
+🔗 **Live app:** https://sumankr0087.github.io/autonomous-data-scientist/
+🧠 **Backend API:** https://autonomous-data-scientist-api.onrender.com
+(First request may take ~50s — the free backend sleeps after inactivity.)
+
 ---
 
 ## ✨ What it does
 
-| Capability | Description |
-|---|---|
-| Understands a question | Planner agent decomposes intent into a step plan |
-| Generates SQL | SQL agent writes & validates queries against DuckDB |
-| Performs EDA | EDA agent profiles data, finds trends & anomalies |
-| Trains ML models | ML agent builds baseline models for prediction/drivers |
-| Creates visualizations | Viz agent produces charts for the findings |
-| Writes insights | Report agent composes an executive summary |
+Ask a business question in plain English. A team of AI agents does the whole
+analysis for you — **no SQL, Python or ML knowledge needed** — and returns a set
+of tabbed results:
 
-**Advanced patterns:** reflection, tool-calling, memory, multi-agent
-orchestration, and a human-in-the-loop approval gate.
+| Tab | What it contains |
+|---|---|
+| **📄 Report** | A business-ready executive report: direct answer, key findings, likely cause/drivers, recommended actions, and a confidence & caveats note |
+| **🧠 Plan** | The step-by-step plan the AI chose, its rationale, and whether an ML model was needed |
+| **🗃️ SQL & Data** | The exact SQL query the agent wrote + the raw result table |
+| **📊 EDA** | Exploratory analysis — trends, group comparisons and anomalies |
+| **🤖 ML** | (When useful) a trained baseline model with metrics and the top feature importances (drivers) |
+| **📈 Chart** | A chart visualising the key movers in the result |
+
+### What it can answer
+
+It runs on a sample retail **sales dataset**: **12 states** across 4 regions, multiple
+**categories & products**, three **channels** (Online / Retail / Partner), spanning the
+**last two years** (including the current year). Ask about any of these dimensions —
+one state or all of them, a region, a channel, a product, a year or a quarter.
+
+Examples:
+- *"Why did sales drop in Maharashtra last quarter?"*
+- *"Which product categories grew the most this year?"*
+- *"Compare online vs retail vs partner revenue by region."*
+- *"What factors drive revenue? Predict the key drivers."*
+
+**Under the hood:** a multi-agent pipeline (Planner → SQL → EDA → ML → Viz →
+Report) with reflection, tool-calling, run memory and a human-in-the-loop
+approval gate.
 
 ---
 

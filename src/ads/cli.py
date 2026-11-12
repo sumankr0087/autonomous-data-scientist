@@ -96,6 +96,18 @@ def cmd_run(args: argparse.Namespace) -> int:
     print(f"  needs_ml  : {result.get('needs_ml')}")
     for i, step in enumerate(result.get("plan", []), 1):
         print(f"  {i}. {step}")
+
+    if result.get("sql"):
+        print("-" * 60)
+        print(f"SQL (rows={result.get('row_count', 0)}):")
+        print(f"  {result['sql']}")
+
+    eda = result.get("eda") or {}
+    if eda.get("narrative"):
+        print("-" * 60)
+        print("EDA — key findings:")
+        print(eda["narrative"])
+
     print("=" * 60)
     print(result.get("report", "(no report)"))
     return 0 if result.get("status") == "completed" else 1

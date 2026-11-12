@@ -48,13 +48,14 @@ class Settings(BaseSettings):
     log_to_file: bool = True
 
     # ---- LLM ----
-    llm_provider: Literal["gemini", "openai", "anthropic"] = "gemini"
+    llm_provider: Literal["gemini", "groq", "openai", "anthropic"] = "gemini"
     llm_model: str = "gemini-flash-lite-latest"
     llm_temperature: float = 0.0
     llm_max_tokens: int = 2000
     openai_api_key: str | None = None
     anthropic_api_key: str | None = None
     google_api_key: str | None = None
+    groq_api_key: str | None = None
 
     # ---- Data / DB ----
     duckdb_path: str = str(DATA_DIR / "warehouse.duckdb")
@@ -64,14 +65,18 @@ class Settings(BaseSettings):
     enable_human_approval: bool = True
     enable_reflection: bool = True
 
+    def key_for(self, provider: str) -> str | None:
+        return {
+            "gemini": self.google_api_key,
+            "groq": self.groq_api_key,
+            "openai": self.openai_api_key,
+            "anthropic": self.anthropic_api_key,
+        }.get(provider)
+
     @property
     def active_api_key(self) -> str | None:
         """Return the API key for the configured provider."""
-        return {
-            "gemini": self.google_api_key,
-            "openai": self.openai_api_key,
-            "anthropic": self.anthropic_api_key,
-        }.get(self.llm_provider)
+        return self.key_for(self.llm_provider)
 
 
 @lru_cache

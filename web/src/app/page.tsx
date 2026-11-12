@@ -45,7 +45,24 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [models, setModels] = useState<{ provider: string; model: string; label: string }[]>([]);
+  const [sel, setSel] = useState<string>(""); // "provider|model"
   const endRef = useRef<HTMLDivElement>(null);
+
+  // Load the selectable models from the backend.
+  useEffect(() => {
+    fetch(`${apiBase.replace(/\/$/, "")}/providers`)
+      .then((r) => r.json())
+      .then((d) => {
+        setModels(d.providers || []);
+        const def = `${d.default_provider}|${d.default_model}`;
+        const has = (d.providers || []).some((m: { provider: string; model: string }) => `${m.provider}|${m.model}` === def);
+        if (d.providers?.length) {
+          setSel(has ? def : `${d.providers[0].provider}|${d.providers[0].model}`);
+        }
+      })
+      .catch(() => {});
+  }, [apiBase]);
 
   useEffect(() => {
     try {
@@ -86,10 +103,11 @@ export default function Home() {
     setQuestion("");
     setPending(text);
     try {
+      const [provider, model] = sel.includes("|") ? sel.split("|") : [undefined, undefined];
       const res = await fetch(`${apiBase.replace(/\/$/, "")}/run`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: text }),
+        body: JSON.stringify({ question: text, provider, model }),
       });
       if (!res.ok) throw new Error(`API returned ${res.status}`);
       const data = await res.json();
@@ -218,6 +236,20 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            {models.length > 0 && (
+              <select
+                value={sel}
+                onChange={(e) => setSel(e.target.value)}
+                title="Choose the AI model"
+                className="text-xs bg-white border border-black/10 rounded-lg px-2 py-1.5 max-w-[11rem] focus:outline-none focus:ring-2 focus:ring-violet-300"
+              >
+                {models.map((m) => (
+                  <option key={m.label} value={`${m.provider}|${m.model}`}>
+                    {m.label}
+                  </option>
+                ))}
+              </select>
+            )}
             <button
               onClick={() => setShowAbout(true)}
               className="flex items-center gap-1 text-sm text-neutral-600 hover:text-violet-600"

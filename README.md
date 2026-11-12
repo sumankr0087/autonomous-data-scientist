@@ -308,6 +308,22 @@ run is traceable.
 The app has a **Python backend** (the agents + your API key) and a **static
 frontend**. The backend can't run on GitHub Pages, so it's a two-part deploy:
 
+### Choosing the AI model (Gemini / Groq)
+
+The app is **provider-agnostic**. Configure keys on the backend; the UI shows a
+**model dropdown** with whichever providers have a key set:
+
+- **Google Gemini** — set `GOOGLE_API_KEY` (free tier, lower daily limit)
+- **Groq** — set `GROQ_API_KEY` (free tier, **much more generous & very fast**, Llama models)
+
+#### How to get a free Groq API key
+1. Go to **https://console.groq.com** and sign in (Google/GitHub login works).
+2. Open **API Keys** → **Create API Key** → name it → **Submit**.
+3. Copy the key (starts with `gsk_…`) — you only see it once.
+4. Add it to the backend: in Render → service → **Environment** →
+   `GROQ_API_KEY = gsk_…` → **Save** (redeploys). Locally, put it in `.env`.
+5. Reload the app → pick **Groq · Llama 3.3 70B** from the model dropdown and chat.
+
 ### 1. Backend → Hugging Face Spaces (free) — FastAPI
 1. Create a new **Space** at <https://huggingface.co/new-space> → SDK **Docker** →
    name it `autonomous-data-scientist`.

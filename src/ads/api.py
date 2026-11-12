@@ -53,6 +53,23 @@ app.add_middleware(
 
 class RunRequest(BaseModel):
     question: str
+    provider: str | None = None
+    model: str | None = None
+
+
+# Selectable models shown in the UI dropdown (only those with a server-side key appear).
+PROVIDER_CATALOG = [
+    {"id": "gemini", "label": "Google Gemini · Flash-Lite", "model": "gemini-flash-lite-latest"},
+    {"id": "groq", "label": "Groq · Llama 3.3 70B (fast, generous free)", "model": "llama-3.3-70b-versatile"},
+    {"id": "groq", "label": "Groq · Llama 3.1 8B (fastest)", "model": "llama-3.1-8b-instant"},
+]
+
+
+def _default_model(provider: str) -> str:
+    for p in PROVIDER_CATALOG:
+        if p["id"] == provider:
+            return p["model"]
+    return ""
 
 
 @app.get("/health")
@@ -64,6 +81,20 @@ def health() -> dict:
 @app.get("/examples")
 def examples() -> dict:
     return {"examples": EXAMPLES}
+
+
+@app.get("/providers")
+def providers() -> dict:
+    """List model options that actually have a key configured on the server."""
+    from config.settings import get_settings
+
+    s = get_settings()
+    available = [
+        {"provider": p["id"], "model": p["model"], "label": p["label"]}
+        for p in PROVIDER_CATALOG
+        if s.key_for(p["id"])
+    ]
+    return {"providers": available, "default_provider": s.llm_provider, "default_model": s.llm_model}
 
 
 @app.get("/diag")
@@ -103,18 +134,37 @@ def _charts_as_data_urls(paths: list[str]) -> list[str]:
 
 @app.post("/run")
 def run(req: RunRequest) -> dict:
-    from ads.core.exceptions import RateLimitError
+    from config.settings import get_settings
 
+    from ads.core.exceptions import RateLimitError
+    from ads.llm.client import set_llm_override
+
+    s = get_settings()
+    provider = req.provider or s.llm_provider
+    model = req.model or (_default_model(provider) if req.provider else s.llm_model)
+
+    if not s.key_for(provider):
+        return {
+            "status": "error",
+            "error": f"No API key configured on the server for provider '{provider}'.",
+            "question": req.question,
+        }
+
+    set_llm_override(provider, model)
     try:
         result = run_workflow(req.question)
     except RateLimitError as exc:
         when = f" Try again in about {exc.retry_after}." if exc.retry_after else " Please try again later."
         window_word = {"day": "daily", "hour": "hourly", "minute": "per-minute"}.get(exc.window or "", "")
         window = f" (the {window_word} free AI limit was reached)" if window_word else ""
-        log.warning("Rate limited: %s", exc.details)
+        # Suggest Groq if it's configured and not already the one that failed.
+        suggest = ""
+        if provider != "groq" and s.key_for("groq"):
+            suggest = " You can switch the model to Groq (top-right) and try again now."
+        log.warning("Rate limited (%s): %s", provider, exc.details)
         return {
             "status": "rate_limited",
-            "message": f"The AI usage limit has been reached{window}.{when}",
+            "message": f"The {provider} usage limit has been reached{window}.{when}{suggest}",
             "retry_after": exc.retry_after,
             "window": exc.window,
             "question": req.question,
@@ -122,6 +172,8 @@ def run(req: RunRequest) -> dict:
     except Exception as exc:  # noqa: BLE001 - surface the real cause to the client
         log.exception("Run failed")
         return {"status": "error", "error": f"{type(exc).__name__}: {exc}", "question": req.question}
+    finally:
+        set_llm_override(None, None)
     return {
         "status": result.get("status"),
         "question": req.question,

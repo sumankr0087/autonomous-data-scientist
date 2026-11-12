@@ -16,6 +16,7 @@ from typing import Any
 
 from config.settings import Settings, get_settings
 
+import contextvars
 import re
 
 from ads.core.exceptions import ConfigError, LLMError, RateLimitError
@@ -109,6 +110,43 @@ class OpenAIClient(BaseLLMClient):
         )
 
 
+class GroqClient(BaseLLMClient):
+    """Groq — OpenAI-compatible API, generous free tier, very fast (Llama models)."""
+
+    def __init__(self, settings: Settings) -> None:
+        super().__init__(settings)
+        if not settings.groq_api_key:
+            raise ConfigError("GROQ_API_KEY is not set but llm_provider=groq")
+        try:
+            from openai import OpenAI  # Groq is OpenAI-compatible
+        except ImportError as exc:  # pragma: no cover
+            raise ConfigError("`openai` package not installed. `pip install openai`") from exc
+        self._client = OpenAI(
+            api_key=settings.groq_api_key, base_url="https://api.groq.com/openai/v1"
+        )
+
+    def complete(self, prompt: str, *, system: str | None = None, **kwargs: Any) -> LLMResponse:
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        try:
+            resp = self._client.chat.completions.create(
+                model=self.settings.llm_model,
+                messages=messages,
+                temperature=kwargs.get("temperature", self.settings.llm_temperature),
+                max_tokens=kwargs.get("max_tokens", self.settings.llm_max_tokens),
+            )
+        except Exception as exc:  # noqa: BLE001
+            msg = str(exc)
+            if "429" in msg or "rate_limit" in msg.lower() or "quota" in msg.lower():
+                raise _as_rate_limit(msg) from exc
+            raise LLMError("Groq completion failed", details=msg) from exc
+        return LLMResponse(
+            text=resp.choices[0].message.content or "", model=self.settings.llm_model, raw=resp
+        )
+
+
 class AnthropicClient(BaseLLMClient):
     def __init__(self, settings: Settings) -> None:
         super().__init__(settings)
@@ -174,15 +212,35 @@ class GeminiClient(BaseLLMClient):
         return LLMResponse(text=resp.text or "", model=self.settings.llm_model, raw=resp)
 
 
+# Per-request override (set by the API so the UI can pick a provider/model).
+_override: "contextvars.ContextVar[tuple[str, str] | None]" = contextvars.ContextVar(
+    "llm_override", default=None
+)
+
+
+def set_llm_override(provider: str | None, model: str | None) -> None:
+    """Set the active provider/model for this request (None to clear)."""
+    _override.set((provider, model) if provider else None)
+
+
+_CLIENTS = {
+    "gemini": GeminiClient,
+    "groq": GroqClient,
+    "openai": OpenAIClient,
+    "anthropic": AnthropicClient,
+}
+
+
 def get_llm_client(settings: Settings | None = None) -> BaseLLMClient:
-    """Factory: return the client for the configured provider."""
+    """Factory: return the client for the configured (or overridden) provider."""
     settings = settings or get_settings()
-    provider = settings.llm_provider
-    log.debug("Creating LLM client", extra={"provider": provider, "model": settings.llm_model})
-    if provider == "gemini":
-        return GeminiClient(settings)
-    if provider == "openai":
-        return OpenAIClient(settings)
-    if provider == "anthropic":
-        return AnthropicClient(settings)
-    raise ConfigError(f"Unknown llm_provider: {provider}")
+    ov = _override.get()
+    provider = (ov[0] if ov and ov[0] else settings.llm_provider)
+    model = (ov[1] if ov and ov[1] else settings.llm_model)
+    # Build settings carrying the resolved provider + model.
+    eff = settings.model_copy(update={"llm_provider": provider, "llm_model": model})
+    cls = _CLIENTS.get(provider)
+    if cls is None:
+        raise ConfigError(f"Unknown llm_provider: {provider}")
+    log.debug("Creating LLM client", extra={"provider": provider, "model": model})
+    return cls(eff)

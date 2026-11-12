@@ -45,13 +45,27 @@ def _quarter(month: int) -> int:
     return (month - 1) // 3 + 1
 
 
+def _last_complete_quarter(end: pd.Timestamp) -> tuple[int, int]:
+    """Return (year, quarter_number) of the last *complete* quarter before `end`."""
+    cur_q = _quarter(end.month)
+    if cur_q == 1:
+        return end.year - 1, 4
+    return end.year, cur_q - 1
+
+
 def generate_sales(seed: int = 42) -> pd.DataFrame:
-    """Build the synthetic sales DataFrame (≈ 8k rows across 2024–2025)."""
+    """Build a synthetic sales DataFrame spanning ~2 years ending today.
+
+    This always includes the current year, and injects a visible sales drop in
+    Maharashtra's Online channel during the most recent *complete* quarter.
+    """
     rng = np.random.default_rng(seed)
-    start = pd.Timestamp("2024-01-01")
-    end = pd.Timestamp("2025-12-31")
+    end = pd.Timestamp(pd.Timestamp.today().date())
+    start = pd.Timestamp(year=end.year - 1, month=1, day=1)  # Jan 1 last year
     all_states = [(r, s) for r, states in REGIONS.items() for s in states]
     products = [(c, p) for c, ps in CATEGORIES.items() for p in ps]
+
+    drop_year, drop_q = _last_complete_quarter(end)
 
     rows: list[dict] = []
     order_id = 1
@@ -66,10 +80,14 @@ def generate_sales(seed: int = 42) -> pd.DataFrame:
         unit_price = round(base * rng.uniform(0.9, 1.1), 2)
         discount = round(float(rng.choice([0, 0, 0.05, 0.10, 0.15])), 2)
 
-        # --- Injected signal: Maharashtra drops in Q4 2025 ---
-        # Online channel collapses there (supply/logistics issue) → big drop.
+        # --- Injected signal: Maharashtra Online channel collapses in the
+        # most recent complete quarter (so "last quarter" shows a real drop). ---
         keep = True
-        if state == "Maharashtra" and order_date >= pd.Timestamp("2025-10-01"):
+        if (
+            state == "Maharashtra"
+            and order_date.year == drop_year
+            and _quarter(order_date.month) == drop_q
+        ):
             if channel == "Online" and rng.random() < 0.75:
                 keep = False  # most online Maharashtra orders disappear
             elif rng.random() < 0.35:

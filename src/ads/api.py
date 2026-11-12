@@ -33,10 +33,10 @@ EXAMPLES = [
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Always (re)seed on startup so the sample data spans up to the current date.
     db = Database()
-    if not db.exists() or not db.list_tables():
-        log.info("Seeding sample warehouse on startup")
-        seed_database(db)
+    log.info("Seeding sample warehouse on startup")
+    seed_database(db)
     yield
 
 

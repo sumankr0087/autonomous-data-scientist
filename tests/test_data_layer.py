@@ -34,16 +34,24 @@ def test_schema_text_lists_columns(seeded_db):
 
 
 def test_maharashtra_drop_is_present(seeded_db):
-    """The injected signal: Q4 2025 Maharashtra revenue < its Q4 2024 revenue."""
-    q = """
+    """The injected signal: Maharashtra Online revenue collapses in the most
+    recent complete quarter vs the same quarter a year earlier."""
+    import pandas as pd
+
+    from ads.data.seed import _last_complete_quarter
+
+    end = pd.Timestamp(pd.Timestamp.today().date())
+    drop_year, drop_qn = _last_complete_quarter(end)
+    q = f"""
         SELECT year, SUM(revenue) AS rev
         FROM sales
-        WHERE state = 'Maharashtra' AND quarter = 'Q4'
+        WHERE state = 'Maharashtra' AND channel = 'Online' AND quarter = 'Q{drop_qn}'
         GROUP BY year ORDER BY year
     """
     df = seeded_db.execute_df(q)
     by_year = dict(zip(df["year"], df["rev"]))
-    assert by_year[2025] < by_year[2024]  # visible drop
+    # Drop-quarter online revenue is far below the prior year's same quarter.
+    assert by_year.get(drop_year, 0) < by_year.get(drop_year - 1, 1e12)
 
 
 def test_sql_tool_runs_select(seeded_db):

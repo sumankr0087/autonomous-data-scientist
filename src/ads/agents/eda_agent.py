@@ -66,21 +66,24 @@ def analyze(
     question: str,
     llm: BaseLLMClient | None = None,
 ) -> EdaResult:
-    """Compute findings and a narrative for the query result."""
+    """Compute findings and a concise narrative for the query result.
+
+    The narrative is built deterministically (no LLM call) to save the free-tier
+    quota — the report agent still turns these findings into a full written report.
+    Pass `llm` explicitly to opt into an LLM-written narrative.
+    """
     df = data if isinstance(data, pd.DataFrame) else pd.DataFrame(data or [])
     findings = analyze_dataframe(df)
 
-    # Offline guard (tests) or empty data -> template narrative, no LLM call.
-    if findings.get("empty") or (llm is None and os.getenv("ADS_DISABLE_LLM")):
+    if llm is None:
         return EdaResult(findings=findings, narrative=_template_narrative(findings))
 
     try:
-        client = llm or get_llm_client()
         prompt = PROMPT.format(
             question=question,
             findings=json.dumps(findings, default=str)[:6000],
         )
-        narrative = client.complete(prompt, system=SYSTEM, max_tokens=4000).text.strip()
+        narrative = llm.complete(prompt, system=SYSTEM, max_tokens=4000).text.strip()
         if not narrative:
             raise ValueError("empty narrative")
         return EdaResult(findings=findings, narrative=narrative)

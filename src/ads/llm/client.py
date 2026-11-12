@@ -44,7 +44,13 @@ def _as_rate_limit(msg: str) -> RateLimitError:
         if mm:
             secs = int(mm.group(1) or 0) * 60 + int(float(mm.group(2)))
     if secs is not None:
-        retry_after = f"{secs // 60} min" if secs >= 60 else f"{secs} sec"
+        if secs >= 3600:
+            h, m = secs // 3600, (secs % 3600) // 60
+            retry_after = f"{h} hr" + (f" {m} min" if m else "")
+        elif secs >= 60:
+            retry_after = f"{secs // 60} min"
+        else:
+            retry_after = f"{secs} sec"
 
     return RateLimitError("LLM usage limit reached", details=msg, retry_after=retry_after, window=window)
 

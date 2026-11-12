@@ -24,5 +24,6 @@ RUN DUCKDB_PATH=/tmp/warehouse.duckdb python main.py seed || true
 
 EXPOSE 7860
 
-# GOOGLE_API_KEY is provided at runtime (HF Space secret / docker -e).
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "7860"]
+# Listen on Render's $PORT when provided, else 7860 (HF Spaces / local).
+# GOOGLE_API_KEY is provided at runtime (Render env / HF secret / docker -e).
+CMD ["sh", "-c", "uvicorn api:app --host 0.0.0.0 --port ${PORT:-7860}"]

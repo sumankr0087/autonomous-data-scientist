@@ -203,8 +203,13 @@ export default function Home() {
             <button className="md:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}>
               <FiMenu size={20} />
             </button>
-            <span className="text-xl">🤖</span>
-            <h1 className="font-bold truncate pink-text">Autonomous Data Scientist</h1>
+            <span className="text-xl">📊</span>
+            <div className="min-w-0">
+              <h1 className="font-bold truncate pink-text leading-tight">AI Business Analyst</h1>
+              <p className="hidden sm:block text-[0.65rem] text-neutral-500 leading-tight">
+                Ask your sales data — get instant insights, charts &amp; reports
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -336,7 +341,7 @@ function AboutModal({ onClose }: { onClose: () => void }) {
         </div>
 
         <p className="text-sm text-neutral-700 leading-relaxed mb-4">
-          <strong>Autonomous Data Scientist</strong> lets you ask a business question in plain
+          <strong>AI Business Analyst</strong> lets you ask a business question in plain
           English. A team of AI agents then does the whole analysis for you — no SQL, Python or ML
           knowledge needed. They <strong>write and run SQL</strong>, <strong>explore the data</strong>,
           <strong> train a model</strong> when it helps, <strong>draw a chart</strong>, and{" "}

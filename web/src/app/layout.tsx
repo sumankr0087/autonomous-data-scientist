@@ -5,9 +5,9 @@ import "./globals.css";
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: "Autonomous Data Scientist",
+  title: "AI Business Analyst — Ask your data",
   description:
-    "Ask a business question — the agents generate SQL, analyse the data, train a model, draw a chart and write an executive report.",
+    "Ask a business question in plain English and get instant SQL, analysis, a chart and an executive report — powered by autonomous AI agents.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

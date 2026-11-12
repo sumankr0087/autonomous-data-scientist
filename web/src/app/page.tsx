@@ -82,7 +82,7 @@ export default function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-5 py-10">
+    <main className="mx-auto max-w-4xl px-5 py-10 min-h-screen flex flex-col">
       <header className="mb-8">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -271,7 +271,7 @@ export default function Home() {
         </div>
       )}
 
-      <footer className="mt-16 pt-6 border-t border-black/10 text-center text-xs text-neutral-500">
+      <footer className="mt-auto pt-10 border-t border-black/10 text-center text-xs text-neutral-500">
         Built by Suman Kumar ·{" "}
         <a className="text-violet-600" href="https://github.com/sumankr0087/autonomous-data-scientist">
           GitHub

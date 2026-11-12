@@ -1,10 +1,10 @@
-name: Deploy showcase to GitHub Pages
+name: Deploy web UI to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
-      - "site/**"
+      - "web/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -18,18 +18,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        working-directory: web
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /autonomous-data-scientist
+          # Set repo Variable API_URL (Settings -> Secrets and variables ->
+          # Actions -> Variables) to your deployed FastAPI backend URL.
+          NEXT_PUBLIC_API_URL: ${{ vars.API_URL }}
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: web/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4

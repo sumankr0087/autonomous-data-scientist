@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f3f4fb;
+  --card: #ffffff;
+  --ink: #15151f;
+  --muted: #5c5c6b;
+  --accent: #6d28d9;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(50rem 36rem at 85% -5%, rgba(167,139,250,.35), transparent 55%),
+    radial-gradient(40rem 32rem at 0% 0%, rgba(34,211,238,.22), transparent 50%);
+}
+
+@layer components {
+  .card { background: var(--card); border: 1px solid rgba(27,27,31,.08); border-radius: 1rem; }
+  .btn-primary {
+    background: var(--accent); color: #fff; border-radius: 9999px;
+    padding: .6rem 1.3rem; font-weight: 600; font-size: .85rem;
+    transition: background .2s, transform .2s;
+  }
+  .btn-primary:hover { background: #5b21b6; transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+  .pink-text {
+    background: linear-gradient(90deg, #6d28d9, #0891b2);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .prose-report h1 { font-size: 1.5rem; font-weight: 700; margin: .4rem 0; }
+  .prose-report h2 { font-size: 1.1rem; font-weight: 700; margin: 1rem 0 .3rem; color: #6d28d9; }
+  .prose-report ul { list-style: disc; padding-left: 1.2rem; }
+  .prose-report li { margin: .25rem 0; }
+  .prose-report p { margin: .4rem 0; }
+  .prose-report strong { color: var(--ink); }
+}

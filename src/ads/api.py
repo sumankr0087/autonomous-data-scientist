@@ -1,0 +1,95 @@
+"""FastAPI backend for the Autonomous Data Scientist.
+
+Exposes the agent workflow as a JSON API so a static React/Next frontend can call
+it. The LLM API key stays on this server (never in the browser).
+
+Run locally:  uvicorn api:app --reload   (from the repo root)
+"""
+
+from __future__ import annotations
+
+import base64
+from contextlib import asynccontextmanager
+from pathlib import Path
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+from ads.core.logging import get_logger
+from ads.data.seed import seed_database
+from ads.graph.workflow import run_workflow
+from ads.tools.database import Database
+
+log = get_logger(__name__)
+
+EXAMPLES = [
+    "Why did sales drop in Maharashtra last quarter?",
+    "Which product categories grew the most in 2025?",
+    "What factors drive revenue? Predict the key drivers.",
+    "Compare online vs retail vs partner channel revenue by region.",
+]
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db = Database()
+    if not db.exists() or not db.list_tables():
+        log.info("Seeding sample warehouse on startup")
+        seed_database(db)
+    yield
+
+
+app = FastAPI(title="Autonomous Data Scientist API", version="1.0.0", lifespan=lifespan)
+
+# Allow the static frontend (GitHub Pages / localhost) to call the API.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+class RunRequest(BaseModel):
+    question: str
+
+
+@app.get("/health")
+def health() -> dict:
+    db = Database()
+    return {"ok": True, "seeded": db.exists() and bool(db.list_tables())}
+
+
+@app.get("/examples")
+def examples() -> dict:
+    return {"examples": EXAMPLES}
+
+
+def _charts_as_data_urls(paths: list[str]) -> list[str]:
+    out: list[str] = []
+    for c in paths or []:
+        p = Path(c)
+        if p.exists():
+            out.append("data:image/png;base64," + base64.b64encode(p.read_bytes()).decode())
+    return out
+
+
+@app.post("/run")
+def run(req: RunRequest) -> dict:
+    result = run_workflow(req.question)
+    return {
+        "status": result.get("status"),
+        "question": req.question,
+        "plan": result.get("plan", []),
+        "needs_ml": result.get("needs_ml"),
+        "rationale": result.get("rationale"),
+        "sql": result.get("sql"),
+        "row_count": result.get("row_count"),
+        "columns": result.get("query_columns", []),
+        "rows": (result.get("query_result") or [])[:200],
+        "eda": (result.get("eda") or {}).get("narrative"),
+        "ml": result.get("ml"),
+        "report": result.get("report"),
+        "charts": _charts_as_data_urls(result.get("viz", [])),
+    }

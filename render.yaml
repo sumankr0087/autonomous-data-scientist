@@ -1,0 +1,18 @@
+# Render.com free deployment for the FastAPI backend.
+# 1. Push repo to GitHub (done).
+# 2. On render.com -> New -> Blueprint -> pick this repo (uses this file).
+# 3. Add the env var GOOGLE_API_KEY in the Render dashboard.
+services:
+  - type: web
+    name: autonomous-data-scientist-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: LLM_MODEL
+        value: gemini-2.5-flash

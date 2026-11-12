@@ -237,27 +237,48 @@ run is traceable.
 
 ## 🚀 Deployment
 
-This is a **Python + Streamlit app**, so the interactive app cannot run on GitHub
-Pages (Pages only serves static files). Two things are deployed:
+The app has a **Python backend** (the agents + your API key) and a **static
+frontend**. The backend can't run on GitHub Pages, so it's a two-part deploy:
 
-**1. Live interactive app → Streamlit Community Cloud (free)**
+### 1. Backend → Render (free) — FastAPI
 1. Push the repo to GitHub (done).
-2. Go to <https://share.streamlit.io> → **New app** → pick this repo, branch `main`,
-   main file `app.py`.
-3. In **Advanced settings → Secrets**, add:
-   ```
-   GOOGLE_API_KEY = "your-key"
-   ```
-4. Deploy → public `https://<app>.streamlit.app` URL. The app seeds the sample
-   data on first use (sidebar button).
+2. On <https://render.com> → **New → Blueprint** → select this repo (uses
+   `render.yaml`).
+3. Add the env var **`GOOGLE_API_KEY`** in the Render dashboard.
+4. You get a URL like `https://autonomous-data-scientist-api.onrender.com`.
 
-**2. Static showcase → GitHub Pages**
-`site/` is published by `.github/workflows/pages.yml` →
-`https://sumankr0087.github.io/autonomous-data-scientist/`
-(one-time: **Settings → Pages → Source: GitHub Actions**, which the workflow also
-auto-enables).
+(Alternative hosts: Hugging Face Spaces, Railway, Fly.io — anything that runs the
+`uvicorn api:app` command.)
 
-### Docker
+### 2. Frontend (React/Next) → GitHub Pages
+The `web/` Next.js app is built & published by `.github/workflows/pages.yml` →
+`https://sumankr0087.github.io/autonomous-data-scientist/`.
+- One-time: repo **Settings → Pages → Source: GitHub Actions** (the workflow also
+  auto-enables it).
+- Point the frontend at your backend **either** by setting a repo **Variable**
+  `API_URL` (Settings → Secrets and variables → Actions → Variables) before the
+  build, **or** by opening the site and entering the backend URL in the ⚙ settings
+  (saved in your browser).
+
+### Also available: Streamlit (one-click, all-in-one)
+`app.py` is a complete Streamlit UI — deploy on
+[Streamlit Community Cloud](https://share.streamlit.io) (main file `app.py`, add
+`GOOGLE_API_KEY` to Secrets) for a single `*.streamlit.app` URL with no separate
+backend.
+
+### Run locally
+
+```bash
+# backend
+pip install -r requirements.txt
+python main.py seed
+uvicorn api:app --reload                 # http://localhost:8000
+
+# frontend (new terminal)
+cd web && npm install && npm run dev      # http://localhost:3000
+```
+
+### Docker (Streamlit variant)
 
 ```bash
 docker build -t ads .

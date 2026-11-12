@@ -7,6 +7,7 @@ anywhere in the codebase instead of reading `os.environ` directly.
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
@@ -16,9 +17,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Project root = two levels up from this file (config/ -> project root).
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-LOGS_DIR = PROJECT_ROOT / "logs"
-DATA_DIR = PROJECT_ROOT / "data"
-ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
+# Dirs are overridable via env so the app can write to /tmp on read-only hosts
+# (e.g. Hugging Face Spaces runs as a non-root user).
+LOGS_DIR = Path(os.getenv("ADS_LOGS_DIR") or (PROJECT_ROOT / "logs"))
+DATA_DIR = Path(os.getenv("ADS_DATA_DIR") or (PROJECT_ROOT / "data"))
+ARTIFACTS_DIR = Path(os.getenv("ADS_ARTIFACTS_DIR") or (PROJECT_ROOT / "artifacts"))
 
 
 class Settings(BaseSettings):

@@ -1,3 +1,14 @@
+<!-- Hugging Face Spaces metadata (used when this repo is deployed as a Docker Space) -->
+---
+title: Autonomous Data Scientist API
+emoji: 🤖
+colorFrom: purple
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🤖 Autonomous Data Scientist Agent
 
 A production-grade, multi-agent AI system that turns a plain-English **business
@@ -240,15 +251,21 @@ run is traceable.
 The app has a **Python backend** (the agents + your API key) and a **static
 frontend**. The backend can't run on GitHub Pages, so it's a two-part deploy:
 
-### 1. Backend → Render (free) — FastAPI
-1. Push the repo to GitHub (done).
-2. On <https://render.com> → **New → Blueprint** → select this repo (uses
-   `render.yaml`).
-3. Add the env var **`GOOGLE_API_KEY`** in the Render dashboard.
-4. You get a URL like `https://autonomous-data-scientist-api.onrender.com`.
+### 1. Backend → Hugging Face Spaces (free) — FastAPI
+1. Create a new **Space** at <https://huggingface.co/new-space> → SDK **Docker** →
+   name it `autonomous-data-scientist`.
+2. In the Space → **Settings → Variables and secrets** → add secret
+   **`GOOGLE_API_KEY`**.
+3. Push this repo to the Space (it builds the `Dockerfile`, serving the API on
+   port 7860):
+   ```bash
+   git remote add space https://huggingface.co/spaces/<your-hf-username>/autonomous-data-scientist
+   git push space main
+   ```
+4. The API is live at `https://<your-hf-username>-autonomous-data-scientist.hf.space`.
 
-(Alternative hosts: Hugging Face Spaces, Railway, Fly.io — anything that runs the
-`uvicorn api:app` command.)
+(Alternative: **Render** — `render.yaml` is included; New → Blueprint → add
+`GOOGLE_API_KEY`. Any host that runs `uvicorn api:app` works.)
 
 ### 2. Frontend (React/Next) → GitHub Pages
 The `web/` Next.js app is built & published by `.github/workflows/pages.yml` →

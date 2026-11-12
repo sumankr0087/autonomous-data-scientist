@@ -60,8 +60,8 @@ class RunRequest(BaseModel):
 # Selectable models shown in the UI dropdown (only those with a server-side key appear).
 PROVIDER_CATALOG = [
     {"id": "gemini", "label": "Google Gemini · Flash-Lite", "model": "gemini-flash-lite-latest"},
-    {"id": "groq", "label": "Groq · Llama 3.3 70B (fast, generous free)", "model": "llama-3.3-70b-versatile"},
-    {"id": "groq", "label": "Groq · Llama 3.1 8B (fastest)", "model": "llama-3.1-8b-instant"},
+    {"id": "groq", "label": "Groq · GPT-OSS 120B (strong, free)", "model": "openai/gpt-oss-120b"},
+    {"id": "groq", "label": "Groq · GPT-OSS 20B (fastest)", "model": "openai/gpt-oss-20b"},
 ]
 
 

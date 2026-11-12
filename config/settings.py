@@ -49,7 +49,7 @@ class Settings(BaseSettings):
 
     # ---- LLM ----
     llm_provider: Literal["gemini", "openai", "anthropic"] = "gemini"
-    llm_model: str = "gemini-2.5-flash"
+    llm_model: str = "gemini-2.5-flash-lite"
     llm_temperature: float = 0.0
     llm_max_tokens: int = 2000
     openai_api_key: str | None = None

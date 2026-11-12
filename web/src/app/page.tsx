@@ -236,20 +236,6 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {models.length > 0 && (
-              <select
-                value={sel}
-                onChange={(e) => setSel(e.target.value)}
-                title="Choose the AI model"
-                className="text-xs bg-white border border-black/10 rounded-lg px-2 py-1.5 max-w-[11rem] focus:outline-none focus:ring-2 focus:ring-violet-300"
-              >
-                {models.map((m) => (
-                  <option key={m.label} value={`${m.provider}|${m.model}`}>
-                    {m.label}
-                  </option>
-                ))}
-              </select>
-            )}
             <button
               onClick={() => setShowAbout(true)}
               className="flex items-center gap-1 text-sm text-neutral-600 hover:text-violet-600"
@@ -344,21 +330,40 @@ export default function Home() {
         </div>
 
         <div className="border-t border-black/10 bg-white/70 backdrop-blur px-4 py-3">
-          <div className="max-w-3xl mx-auto flex gap-2">
-            <input
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && run()}
-              placeholder={active ? "Ask a follow-up in this chat…" : "Ask a business question…"}
-              className="flex-1 card rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
-            />
-            <button
-              onClick={() => run()}
-              disabled={loading || !question.trim()}
-              className="btn-primary !rounded-full !px-4 flex items-center gap-2"
-            >
-              <FiSend />
-            </button>
+          <div className="max-w-3xl mx-auto">
+            <div className="flex gap-2">
+              <input
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && run()}
+                placeholder={active ? "Ask a follow-up in this chat…" : "Ask a business question…"}
+                className="flex-1 card rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+              />
+              <button
+                onClick={() => run()}
+                disabled={loading || !question.trim()}
+                className="btn-primary !rounded-full !px-4 flex items-center gap-2"
+              >
+                <FiSend />
+              </button>
+            </div>
+            {models.length > 0 && (
+              <div className="flex items-center gap-2 mt-2 px-1">
+                <span className="text-[0.7rem] text-neutral-400">AI model:</span>
+                <select
+                  value={sel}
+                  onChange={(e) => setSel(e.target.value)}
+                  title="Choose the AI model"
+                  className="text-xs bg-white border border-black/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-300"
+                >
+                  {models.map((m) => (
+                    <option key={m.label} value={`${m.provider}|${m.model}`}>
+                      {m.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         </div>
       </div>

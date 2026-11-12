@@ -186,7 +186,7 @@ export default function Home() {
         </div>
         <div className="p-3 border-t border-black/10 text-[0.65rem] text-neutral-400">
           Built by Suman Kumar ·{" "}
-          <a className="text-violet-600" href="https://github.com/sumankr0087/autonomous-data-scientist">
+          <a className="text-violet-600" target="_blank" rel="noreferrer" href="https://github.com/sumankr0087/autonomous-data-scientist">
             GitHub
           </a>
         </div>
@@ -370,7 +370,7 @@ function AboutModal({ onClose }: { onClose: () => void }) {
         <p className="text-xs text-neutral-400">
           Demo note: the backend runs on a free tier that sleeps after inactivity, so the first
           question may take ~50s to wake up. Built by Suman Kumar ·{" "}
-          <a className="text-violet-600" href="https://github.com/sumankr0087/autonomous-data-scientist">
+          <a className="text-violet-600" target="_blank" rel="noreferrer" href="https://github.com/sumankr0087/autonomous-data-scientist">
             source on GitHub
           </a>
           .

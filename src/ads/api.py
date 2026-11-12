@@ -109,7 +109,8 @@ def run(req: RunRequest) -> dict:
         result = run_workflow(req.question)
     except RateLimitError as exc:
         when = f" Try again in about {exc.retry_after}." if exc.retry_after else " Please try again later."
-        window = f" (the {exc.window}ly free limit was reached)" if exc.window else ""
+        window_word = {"day": "daily", "hour": "hourly", "minute": "per-minute"}.get(exc.window or "", "")
+        window = f" (the {window_word} free AI limit was reached)" if window_word else ""
         log.warning("Rate limited: %s", exc.details)
         return {
             "status": "rate_limited",

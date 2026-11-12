@@ -100,7 +100,7 @@ matplotlib / Plotly · Streamlit · Pydantic · Rich.
   Command: `python main.py run "Why did sales drop in Maharashtra last quarter?"`
 - [x] **Step 4 — Planner agent:** question + schema -> ordered plan + step flags (Gemini, JSON, fallback).
 - [x] **Step 5 — SQL agent:** generate -> validate -> execute with self-correcting retries (Gemini).
-- [ ] **Step 6 — EDA agent:** profiling, trend & anomaly detection.
+- [x] **Step 6 — EDA agent:** deterministic profiling + anomaly detection + LLM narrative.
 - [ ] **Step 7 — ML agent:** baseline models & driver analysis.
 - [ ] **Step 8 — Viz + Report agents:** charts and the executive report.
 - [ ] **Step 9 — Advanced:** reflection, memory, human-approval loop.
@@ -153,13 +153,12 @@ for a single DuckDB SELECT (concise; prefers existing dim columns), runs it via
 token budget (gemini-2.5-flash spends output tokens on reasoning). Wired into
 `sql_node`. Tests use a scripted fake LLM + seeded temp DB. Test: `pytest -k sql_agent`.
 
-### ⬜ Step 6 — EDA agent
-- **Goal:** profile the result set — summary stats, time trends, group comparisons,
-  anomaly/outlier detection — and summarise findings in text.
-- **Create:** `src/ads/agents/eda_agent.py` + helpers in `src/ads/tools/eda_tool.py`
-  (pandas describe, groupby trends, z-score / IQR anomalies).
-- **Wire:** `eda_node` stores `eda` (dict of findings) in state.
-- **Test:** feed a DataFrame with a known spike; assert the anomaly is detected.
+### ✅ Step 6 — EDA agent *(done)*
+`src/ads/tools/eda_tool.py` — deterministic `analyze_dataframe(df)` → findings
+(shape, numeric summaries, focus-metric extremes, IQR anomalies). `src/ads/agents/eda_agent.py`
+— `analyze(data, question, llm=None) -> EdaResult(findings, narrative)`: the stats
+are deterministic, the narrative is LLM-written with an offline template fallback.
+Wired into `eda_node` (stores `eda = {findings, narrative}`). Test: `pytest -k eda`.
 
 ### ⬜ Step 7 — ML agent
 - **Goal:** when `needs_ml`, train a baseline model (regression/classification) to

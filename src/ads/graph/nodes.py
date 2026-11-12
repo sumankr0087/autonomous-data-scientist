@@ -67,8 +67,19 @@ def sql_node(state: GraphState) -> dict:
 
 
 def eda_node(state: GraphState) -> dict:
-    _run_log(state).info("[eda_agent] profiling & detecting anomalies (stub)")
-    return {"status": "analyzed", "steps_completed": [AgentName.EDA.value]}
+    """Real EDA agent: findings + narrative from the SQL result."""
+    from ads.agents.eda_agent import analyze
+
+    rlog = _run_log(state)
+    rlog.info("[eda_agent] profiling & detecting anomalies")
+    rows = state.get("query_result", [])
+    result = analyze(rows, state["question"])
+    rlog.info("[eda_agent] %d anomalies", len(result.findings.get("anomalies", [])))
+    return {
+        "eda": {"findings": result.findings, "narrative": result.narrative},
+        "status": "analyzed",
+        "steps_completed": [AgentName.EDA.value],
+    }
 
 
 def ml_node(state: GraphState) -> dict:

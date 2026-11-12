@@ -6,7 +6,7 @@ import { FiSend, FiSettings, FiPlus, FiTrash2, FiMenu } from "react-icons/fi";
 
 const EXAMPLES = [
   "Why did sales drop in Maharashtra last quarter?",
-  "Which product categories grew the most in 2025?",
+  "Which product categories grew the most this year?",
   "What factors drive revenue? Predict the key drivers.",
   "Compare online vs retail vs partner channel revenue by region.",
 ];
@@ -28,7 +28,8 @@ type RunResult = {
   charts: string[];
 };
 
-type Chat = { id: string; question: string; result: RunResult; ts: number };
+type Msg = { id: string; question: string; result: RunResult };
+type Conversation = { id: string; title: string; messages: Msg[]; ts: number };
 
 const TABS = ["Report", "Plan", "SQL & Data", "EDA", "ML", "Chart"] as const;
 type Tab = (typeof TABS)[number];
@@ -37,32 +38,30 @@ export default function Home() {
   const [apiBase, setApiBase] = useState(DEFAULT_API);
   const [showSettings, setShowSettings] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [history, setHistory] = useState<Chat[]>([]);
+  const [convs, setConvs] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
   const [error, setError] = useState("");
-  const [tab, setTab] = useState<Tab>("Report");
   const endRef = useRef<HTMLDivElement>(null);
 
-  // Load persisted state
   useEffect(() => {
     try {
       const savedApi = localStorage.getItem("ads_api_base");
       if (savedApi) setApiBase(savedApi);
-      const savedHist = localStorage.getItem("ads_history");
-      if (savedHist) {
-        const h: Chat[] = JSON.parse(savedHist);
-        setHistory(h);
-        if (h.length) setActiveId(h[0].id);
+      const saved = localStorage.getItem("ads_convs");
+      if (saved) {
+        const c: Conversation[] = JSON.parse(saved);
+        setConvs(c);
+        if (c.length) setActiveId(c[0].id);
       }
     } catch {}
   }, []);
 
-  function persist(h: Chat[]) {
+  function persist(c: Conversation[]) {
     try {
-      localStorage.setItem("ads_history", JSON.stringify(h.slice(0, 30)));
+      localStorage.setItem("ads_convs", JSON.stringify(c.slice(0, 30)));
     } catch {}
   }
   function saveApiBase(v: string) {
@@ -72,20 +71,19 @@ export default function Home() {
     } catch {}
   }
 
+  const active = convs.find((c) => c.id === activeId) || null;
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [activeId, tab, loading]);
-
-  const active = history.find((c) => c.id === activeId) || null;
+  }, [active?.messages.length, loading]);
 
   async function run(q?: string) {
     const text = (q ?? question).trim();
-    if (!text) return;
+    if (!text || loading) return;
     setLoading(true);
     setError("");
     setQuestion("");
     setPending(text);
-    setActiveId(null);
     try {
       const res = await fetch(`${apiBase.replace(/\/$/, "")}/run`, {
         method: "POST",
@@ -98,12 +96,29 @@ export default function Home() {
         setError(`Backend error: ${data.error}`);
         return;
       }
-      const chat: Chat = { id: crypto.randomUUID(), question: text, result: data, ts: Date.now() };
-      const newHist = [chat, ...history];
-      setHistory(newHist);
-      persist(newHist);
-      setActiveId(chat.id);
-      setTab("Report");
+      const msg: Msg = { id: crypto.randomUUID(), question: text, result: data };
+
+      setConvs((prev) => {
+        let next: Conversation[];
+        if (activeId && prev.some((c) => c.id === activeId)) {
+          // append to the active conversation
+          next = prev.map((c) =>
+            c.id === activeId ? { ...c, messages: [...c.messages, msg], ts: Date.now() } : c
+          );
+        } else {
+          // start a new conversation
+          const conv: Conversation = {
+            id: crypto.randomUUID(),
+            title: text,
+            messages: [msg],
+            ts: Date.now(),
+          };
+          setActiveId(conv.id);
+          next = [conv, ...prev];
+        }
+        persist(next);
+        return next;
+      });
     } catch {
       setError(
         `Could not reach the backend at ${apiBase}. It may be waking up (free tier sleeps ~15 min — first call takes ~50s). Try again, or set the URL (⚙).`
@@ -120,11 +135,11 @@ export default function Home() {
     setQuestion("");
     setSidebarOpen(false);
   }
-  function deleteChat(id: string) {
-    const h = history.filter((c) => c.id !== id);
-    setHistory(h);
-    persist(h);
-    if (activeId === id) setActiveId(h[0]?.id ?? null);
+  function deleteConv(id: string) {
+    const c = convs.filter((x) => x.id !== id);
+    setConvs(c);
+    persist(c);
+    if (activeId === id) setActiveId(c[0]?.id ?? null);
   }
 
   return (
@@ -136,19 +151,14 @@ export default function Home() {
         } md:translate-x-0 fixed md:static z-30 w-64 h-full bg-white/80 backdrop-blur border-r border-black/10 flex flex-col transition-transform`}
       >
         <div className="p-3">
-          <button
-            onClick={newChat}
-            className="w-full flex items-center justify-center gap-2 btn-primary"
-          >
+          <button onClick={newChat} className="w-full flex items-center justify-center gap-2 btn-primary">
             <FiPlus /> New analysis
           </button>
         </div>
-        <div className="px-3 text-[0.65rem] uppercase tracking-widest text-neutral-400">History</div>
+        <div className="px-3 text-[0.65rem] uppercase tracking-widest text-neutral-400">Conversations</div>
         <div className="flex-1 overflow-y-auto px-2 py-2 space-y-1">
-          {history.length === 0 && (
-            <p className="text-xs text-neutral-400 px-2 py-3">No analyses yet.</p>
-          )}
-          {history.map((c) => (
+          {convs.length === 0 && <p className="text-xs text-neutral-400 px-2 py-3">No conversations yet.</p>}
+          {convs.map((c) => (
             <div
               key={c.id}
               className={`group flex items-center gap-1 rounded-lg px-2 py-2 cursor-pointer text-sm ${
@@ -156,15 +166,15 @@ export default function Home() {
               }`}
               onClick={() => {
                 setActiveId(c.id);
-                setTab("Report");
                 setSidebarOpen(false);
               }}
             >
-              <span className="flex-1 truncate">{c.question}</span>
+              <span className="flex-1 truncate">{c.title}</span>
+              <span className="text-[0.6rem] text-neutral-400">{c.messages.length}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  deleteChat(c.id);
+                  deleteConv(c.id);
                 }}
                 className="opacity-0 group-hover:opacity-100 text-neutral-400 hover:text-red-500"
               >
@@ -187,7 +197,6 @@ export default function Home() {
 
       {/* Main */}
       <div className="flex-1 flex flex-col h-full min-w-0">
-        {/* Top bar */}
         <header className="flex items-center justify-between px-4 py-3 border-b border-black/10 bg-white/60 backdrop-blur">
           <div className="flex items-center gap-2 min-w-0">
             <button className="md:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}>
@@ -212,15 +221,14 @@ export default function Home() {
           </div>
         )}
 
-        {/* Conversation / results */}
         <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto space-y-5">
             {!active && !loading && !pending && (
               <div className="text-center mt-10">
                 <h2 className="text-2xl font-bold mb-2 pink-text">Ask a business question</h2>
                 <p className="text-neutral-500 text-sm mb-6">
-                  The agents generate SQL, analyse the data, train a model if needed, draw a chart,
-                  and write an executive report.
+                  The agents generate SQL, analyse the data, train a model if needed, draw a chart, and
+                  write an executive report. Keep asking in the same chat to build on it.
                 </p>
                 <div className="flex flex-col gap-2 max-w-xl mx-auto">
                   {EXAMPLES.map((ex) => (
@@ -236,39 +244,19 @@ export default function Home() {
               </div>
             )}
 
-            {active && (
-              <div className="space-y-4">
-                {/* user bubble */}
+            {active?.messages.map((m) => (
+              <div key={m.id} className="space-y-3">
                 <div className="flex justify-end">
                   <div className="bg-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[85%]">
-                    {active.question}
+                    {m.question}
                   </div>
                 </div>
-
-                {/* assistant answer */}
-                <div className="card rounded-2xl rounded-bl-sm p-4">
-                  <div className="flex gap-1 border-b border-black/10 mb-4 overflow-x-auto">
-                    {TABS.map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setTab(t)}
-                        className={`px-3 py-2 text-sm whitespace-nowrap ${
-                          tab === t
-                            ? "text-violet-700 border-b-2 border-violet-600 font-semibold"
-                            : "text-neutral-500"
-                        }`}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                  <ResultTab tab={tab} r={active.result} />
-                </div>
+                <AnswerCard result={m.result} />
               </div>
-            )}
+            ))}
 
             {loading && (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {pending && (
                   <div className="flex justify-end">
                     <div className="bg-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[85%]">
@@ -286,19 +274,18 @@ export default function Home() {
               </div>
             )}
 
-            {error && <div className="card p-4 mt-4 text-sm text-red-600 border-red-200">{error}</div>}
+            {error && <div className="card p-4 text-sm text-red-600 border-red-200">{error}</div>}
             <div ref={endRef} />
           </div>
         </div>
 
-        {/* Input bar (bottom) */}
         <div className="border-t border-black/10 bg-white/70 backdrop-blur px-4 py-3">
           <div className="max-w-3xl mx-auto flex gap-2">
             <input
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !loading && run()}
-              placeholder="Ask a business question…"
+              onKeyDown={(e) => e.key === "Enter" && run()}
+              placeholder={active ? "Ask a follow-up in this chat…" : "Ask a business question…"}
               className="flex-1 card rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
             />
             <button
@@ -311,6 +298,28 @@ export default function Home() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function AnswerCard({ result }: { result: RunResult }) {
+  const [tab, setTab] = useState<Tab>("Report");
+  return (
+    <div className="card rounded-2xl rounded-bl-sm p-4">
+      <div className="flex gap-1 border-b border-black/10 mb-4 overflow-x-auto">
+        {TABS.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`px-3 py-2 text-sm whitespace-nowrap ${
+              tab === t ? "text-violet-700 border-b-2 border-violet-600 font-semibold" : "text-neutral-500"
+            }`}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+      <ResultTab tab={tab} r={result} />
     </div>
   );
 }
@@ -397,7 +406,6 @@ function ResultTab({ tab, r }: { tab: Tab; r: RunResult }) {
     ) : (
       <p className="text-sm text-neutral-500">{r.ml?.summary || "ML was not required."}</p>
     );
-  // Chart
   return r.charts?.length > 0 ? (
     <div>
       {r.charts.map((c, i) => (

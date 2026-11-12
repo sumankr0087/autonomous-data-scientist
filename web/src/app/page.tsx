@@ -150,12 +150,12 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden text-neutral-800">
+    <div className="flex h-[100dvh] overflow-hidden text-neutral-800">
       {/* Sidebar */}
       <aside
         className={`${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 fixed md:static z-30 w-64 h-full bg-white/80 backdrop-blur border-r border-black/10 flex flex-col transition-transform`}
+        } md:translate-x-0 fixed md:static z-30 w-64 h-[100dvh] bg-white/80 backdrop-blur border-r border-black/10 flex flex-col transition-transform`}
       >
         <div className="p-3">
           <button onClick={newChat} className="w-full flex items-center justify-center gap-2 btn-primary">

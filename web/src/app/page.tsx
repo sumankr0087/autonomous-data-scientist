@@ -65,7 +65,12 @@ export default function Home() {
         body: JSON.stringify({ question }),
       });
       if (!res.ok) throw new Error(`API returned ${res.status}`);
-      setResult(await res.json());
+      const data = await res.json();
+      if (data.status === "error") {
+        setError(`Backend error: ${data.error}`);
+        return;
+      }
+      setResult(data);
       setTab("Report");
     } catch (e) {
       setError(

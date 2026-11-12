@@ -77,7 +77,11 @@ def _charts_as_data_urls(paths: list[str]) -> list[str]:
 
 @app.post("/run")
 def run(req: RunRequest) -> dict:
-    result = run_workflow(req.question)
+    try:
+        result = run_workflow(req.question)
+    except Exception as exc:  # noqa: BLE001 - surface the real cause to the client
+        log.exception("Run failed")
+        return {"status": "error", "error": f"{type(exc).__name__}: {exc}", "question": req.question}
     return {
         "status": result.get("status"),
         "question": req.question,

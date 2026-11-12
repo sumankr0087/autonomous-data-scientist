@@ -15,7 +15,7 @@ import os
 import re
 from dataclasses import dataclass, field
 
-from ads.core.exceptions import SQLExecutionError, SQLGenerationError
+from ads.core.exceptions import LLMError, SQLExecutionError, SQLGenerationError
 from ads.core.logging import get_logger
 from ads.llm.client import BaseLLMClient, get_llm_client
 from ads.tools.sql_tool import SQLTool
@@ -110,7 +110,10 @@ def answer(
 
     tool = sql_tool or SQLTool()
     schema = schema or tool.get_schema()
-    client = llm or get_llm_client()
+    try:
+        client = llm or get_llm_client()
+    except Exception as exc:  # noqa: BLE001 - e.g. missing/invalid API key
+        return SQLAnswer(ok=False, error=f"LLM unavailable: {exc}", attempts=0)
 
     last_error: str | None = None
     last_sql: str | None = None
@@ -130,7 +133,7 @@ def answer(
                 row_count=len(df),
                 attempts=attempt,
             )
-        except (SQLGenerationError, SQLExecutionError) as exc:
+        except (SQLGenerationError, SQLExecutionError, LLMError) as exc:
             last_error = str(exc)
             log.warning("SQL attempt %d failed: %s", attempt, last_error)
 

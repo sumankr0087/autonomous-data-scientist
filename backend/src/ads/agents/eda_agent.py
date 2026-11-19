@@ -44,6 +44,19 @@ the biggest changes, extremes and anomalies. Be specific and quantitative. Retur
 plain text bullets only."""
 
 
+def _fmt_num(v: Any) -> Any:
+    """Round floats to 2 decimals for display; leave other values unchanged."""
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, float):
+        return int(v) if v.is_integer() else round(v, 2)
+    return v
+
+
+def _round_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {k: _fmt_num(v) for k, v in row.items()}
+
+
 def _template_narrative(findings: dict[str, Any]) -> str:
     if findings.get("empty"):
         return "- The query returned no rows, so there is nothing to analyse."
@@ -51,10 +64,10 @@ def _template_narrative(findings: dict[str, Any]) -> str:
     focus = findings.get("focus_metric")
     extremes = findings.get("extremes", {})
     if focus and extremes.get("lowest"):
-        low = extremes["lowest"][0]
+        low = _round_row(extremes["lowest"][0])
         lines.append(f"- Lowest `{focus}`: {low.get(focus)} ({low}).")
     if focus and extremes.get("highest"):
-        high = extremes["highest"][0]
+        high = _round_row(extremes["highest"][0])
         lines.append(f"- Highest `{focus}`: {high.get(focus)} ({high}).")
     if findings.get("anomalies"):
         lines.append(f"- {len(findings['anomalies'])} anomaly/outlier row(s) detected.")

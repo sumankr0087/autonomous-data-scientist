@@ -55,11 +55,12 @@ def make_charts(
             plot_df["_label"] = plot_df.index.astype(str)
             label = "_label"
 
-        plot_df = plot_df.sort_values(focus).head(top_n)  # biggest negative movers
+        # Show the highest values (top performers); invert_yaxis puts #1 on top.
+        plot_df = plot_df.sort_values(focus, ascending=False).head(top_n)
         fig, ax = plt.subplots(figsize=(9, 5))
         colors = ["#d62728" if v < 0 else "#2ca02c" for v in plot_df[focus]]
         ax.barh(plot_df[label], plot_df[focus], color=colors)
-        ax.set_title(f"Top movers by {focus}")
+        ax.set_title(f"Top {len(plot_df)} by {focus}")
         ax.set_xlabel(focus)
         ax.invert_yaxis()
         fig.tight_layout()

@@ -34,6 +34,15 @@ type Conversation = { id: string; title: string; messages: Msg[]; ts: number };
 const TABS = ["Report", "Plan", "SQL & Data", "EDA", "ML", "Chart"] as const;
 type Tab = (typeof TABS)[number];
 
+// Display cell values cleanly: whole numbers as-is, decimals rounded to 2 places
+// (avoids floating-point noise like 12826219.900000008), everything else as text.
+function fmtCell(v: unknown): string {
+  if (typeof v === "number" && Number.isFinite(v)) {
+    return Number.isInteger(v) ? v.toLocaleString("en-US") : v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  return String(v);
+}
+
 export default function Home() {
   const [apiBase, setApiBase] = useState(DEFAULT_API);
   const [showSettings, setShowSettings] = useState(false);
@@ -517,7 +526,7 @@ function ResultTab({ tab, r }: { tab: Tab; r: RunResult }) {
                 {r.rows.slice(0, 50).map((row, i) => (
                   <tr key={i} className="border-b">
                     {Object.values(row).map((v, j) => (
-                      <td key={j} className="p-1.5">{String(v)}</td>
+                      <td key={j} className="p-1.5">{fmtCell(v)}</td>
                     ))}
                   </tr>
                 ))}
@@ -549,7 +558,7 @@ function ResultTab({ tab, r }: { tab: Tab; r: RunResult }) {
               {r.ml.importances.map((d, i) => (
                 <tr key={i} className="border-b">
                   <td className="p-1.5">{d.feature}</td>
-                  <td className="p-1.5">{d.importance}</td>
+                  <td className="p-1.5">{fmtCell(d.importance)}</td>
                 </tr>
               ))}
             </tbody>

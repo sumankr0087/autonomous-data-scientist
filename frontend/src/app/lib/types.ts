@@ -2,6 +2,7 @@
 
 export type RunResult = {
   status: string;
+  fell_back_to?: string;
   plan: string[];
   needs_ml: boolean;
   rationale: string;

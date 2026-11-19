@@ -43,20 +43,29 @@ def run(req: RunRequest) -> dict:
             "question": req.question,
         }
 
+    # Groq is the priority model. If it hits its rate limit, automatically fall
+    # back to Gemini (when a Gemini key is configured) instead of failing.
+    fell_back_to = ""
     set_llm_override(provider, model)
     try:
-        result = run_workflow(req.question)
+        try:
+            result = run_workflow(req.question)
+        except RateLimitError:
+            if provider == "groq" and s.key_for("gemini"):
+                log.warning("Groq rate limited; falling back to Gemini.")
+                set_llm_override("gemini", default_model("gemini"))
+                result = run_workflow(req.question)
+                fell_back_to = "gemini"
+            else:
+                raise
     except RateLimitError as exc:
         when = f" Try again in about {exc.retry_after}." if exc.retry_after else " Please try again later."
         window_word = {"day": "daily", "hour": "hourly", "minute": "per-minute"}.get(exc.window or "", "")
         window = f" (the {window_word} free AI limit was reached)" if window_word else ""
-        suggest = ""
-        if provider != "groq" and s.key_for("groq"):
-            suggest = " You can switch the model to Groq (top-right) and try again now."
         log.warning("Rate limited (%s): %s", provider, exc.details)
         return {
             "status": "rate_limited",
-            "message": f"The {provider} usage limit has been reached{window}.{when}{suggest}",
+            "message": f"The AI usage limit has been reached{window}.{when}",
             "retry_after": exc.retry_after,
             "window": exc.window,
             "question": req.question,
@@ -69,6 +78,7 @@ def run(req: RunRequest) -> dict:
 
     return {
         "status": result.get("status"),
+        "fell_back_to": fell_back_to,
         "question": req.question,
         "plan": result.get("plan", []),
         "needs_ml": result.get("needs_ml"),

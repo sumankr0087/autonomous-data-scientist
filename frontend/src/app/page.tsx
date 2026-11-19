@@ -95,6 +95,9 @@ export default function Home() {
         setError(`Backend error: ${data.error}`);
         return;
       }
+      if (data.fell_back_to === "gemini") {
+        setError("⏳ Groq limit reached — answered with Gemini (Flash-Lite) instead.");
+      }
       const msg: Msg = { id: crypto.randomUUID(), question: text, result: data };
       setConvs((prev) => {
         let next: Conversation[];

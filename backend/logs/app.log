@@ -1,0 +1,1390 @@
+2026-11-10 18:00:59,455 | INFO     | ads.cli | Running self-check
+2026-11-10 18:00:59,473 | WARNING  | ads.cli | No API key configured for provider 'openai' — set it in .env before running the agent.
+2026-11-10 18:00:59,478 | INFO     | ads.cli | Runtime directories present
+2026-11-10 18:00:59,480 | INFO     | ads.cli | Self-check PASSED
+2026-11-10 18:01:11,918 | INFO     | test | hello
+2026-11-10 18:18:37,010 | INFO     | ads.cli | Running self-check
+2026-11-10 18:18:37,022 | WARNING  | ads.cli | No API key configured for provider 'openai' — set it in .env before running the agent.
+2026-11-10 18:18:37,027 | INFO     | ads.cli | Runtime directories present
+2026-11-10 18:18:37,027 | INFO     | ads.cli | Self-check PASSED
+2026-11-10 18:24:16,107 | INFO     | ads.cli | Running self-check
+2026-11-10 18:24:16,123 | INFO     | ads.cli | LLM provider configured
+2026-11-10 18:24:16,125 | INFO     | ads.cli | Runtime directories present
+2026-11-10 18:24:16,126 | INFO     | ads.cli | Self-check PASSED
+2026-11-10 18:26:31,335 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:26:48,510 | INFO     | test | hello
+2026-11-10 18:27:52,291 | INFO     | ads.cli | Running self-check
+2026-11-10 18:27:52,311 | INFO     | ads.cli | LLM provider configured
+2026-11-10 18:27:52,316 | INFO     | ads.cli | Runtime directories present
+2026-11-10 18:27:52,318 | INFO     | ads.cli | Self-check PASSED
+2026-11-10 18:30:56,405 | INFO     | ads.cli | Seeding sample warehouse at data/warehouse.duckdb
+2026-11-10 18:30:57,141 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:30:57,212 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:30:57,214 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:30:57,219 | INFO     | ads.cli |   sales        7969 rows
+2026-11-10 18:30:57,221 | INFO     | ads.cli |   products        9 rows
+2026-11-10 18:30:57,287 | INFO     | ads.cli | Seed complete. Tables: products, sales
+2026-11-10 18:31:01,775 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:31:10,199 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:10,261 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:10,263 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:10,833 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:10,886 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:10,889 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:11,441 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:11,490 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:11,492 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:12,085 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:12,134 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:12,136 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:13,160 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:13,216 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:13,218 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:13,223 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:31:13,822 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:13,874 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:13,875 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:14,381 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:14,431 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:31:14,433 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:31:14,439 | INFO     | test | hello
+2026-11-10 18:34:23,113 | INFO     | ads.cli | Seeding sample warehouse at data/warehouse.duckdb
+2026-11-10 18:34:23,624 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:34:23,707 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:34:23,721 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:34:23,724 | INFO     | ads.cli |   sales        7969 rows
+2026-11-10 18:34:23,726 | INFO     | ads.cli |   products        9 rows
+2026-11-10 18:34:23,786 | INFO     | ads.cli | Seed complete. Tables: products, sales
+2026-11-10 18:38:56,348 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:38:56,377 | INFO     | ads.graph.nodes | [planner] decomposing question (stub)
+2026-11-10 18:38:56,379 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:38:56,383 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:38:56,385 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:38:56,387 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:38:56,388 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:38:56,391 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:39:06,297 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:06,371 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:06,373 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:07,012 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:07,065 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:07,067 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:07,765 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:07,826 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:07,828 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:08,519 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:08,573 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:08,575 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:09,266 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:09,318 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:09,320 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:09,324 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:39:10,012 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:10,057 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:10,060 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:10,605 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:10,657 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:39:10,658 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:39:10,667 | INFO     | test | hello
+2026-11-10 18:39:10,677 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:39:10,691 | INFO     | ads.graph.nodes | [planner] decomposing question (stub)
+2026-11-10 18:39:10,693 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:39:10,696 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:39:10,699 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:39:10,702 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:39:10,704 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:39:10,706 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:40:30,501 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:40:30,527 | INFO     | ads.graph.nodes | [planner] decomposing question (stub)
+2026-11-10 18:40:30,531 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:40:30,539 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:40:30,543 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:40:30,548 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:40:30,552 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:40:30,557 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:42:26,266 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:26,331 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:26,331 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:27,047 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:27,105 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:27,106 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:27,858 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:27,922 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:27,925 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:28,562 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:28,624 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:28,626 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:29,337 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:29,407 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:29,408 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:29,412 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:42:30,081 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:30,118 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:30,120 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:30,694 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:30,749 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:42:30,751 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:42:30,761 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-10 18:42:30,766 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-10 18:42:30,771 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:42:30,778 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:42:30,785 | INFO     | test | hello
+2026-11-10 18:42:30,807 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:42:30,826 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:42:30,917 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-10 18:42:30,923 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:42:30,928 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:42:30,932 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:42:30,935 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:42:30,940 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:42:30,945 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:42:33,003 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:42:37,477 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:49:54,473 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:49:55,443 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:49:55,897 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:49:59,596 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:49:59,597 | INFO     | ads.graph.nodes | [planner] The plan focuses on quantifying the sales drop and then disaggregating sales by key dimensions to pinpoint the specific areas of decline.
+2026-11-10 18:49:59,600 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:49:59,604 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:49:59,605 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:49:59,607 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:49:59,608 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:49:59,609 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:50:58,188 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:50:58,865 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:50:59,306 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:51:03,782 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:51:03,782 | INFO     | ads.graph.nodes | [planner] The plan aims to confirm the sales drop and then dissect it by key dimensions to identify the primary contributors to the decline.
+2026-11-10 18:51:03,795 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:51:03,797 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:51:03,801 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:51:03,802 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:51:03,803 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:51:03,804 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:52:06,693 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:52:07,258 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:52:07,659 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:52:12,351 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [planner] The plan aims to confirm the sales drop and then dissect it by key dimensions to identify the primary contributors to the decline.
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:52:12,351 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:53:15,580 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:53:16,209 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:53:16,570 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:53:21,002 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:53:21,004 | INFO     | ads.graph.nodes | [planner] The plan aims to confirm the sales drop and then dissect it by key dimensions to identify the primary contributors to the decline.
+2026-11-10 18:53:21,006 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL (stub)
+2026-11-10 18:53:21,007 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:53:21,009 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:53:21,010 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:53:21,011 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:53:21,013 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:55:04,429 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:04,468 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:04,469 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:04,786 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:04,819 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:04,820 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:05,123 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,156 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,157 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:05,476 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,508 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,509 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:05,823 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,854 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:05,855 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:05,858 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:06,179 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,208 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,210 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:06,495 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,525 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,526 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:06,529 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-10 18:55:06,531 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-10 18:55:06,534 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:55:06,536 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:55:06,539 | INFO     | test | hello
+2026-11-10 18:55:06,826 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,856 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:06,857 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:06,894 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:55:06,895 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:07,197 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,226 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,227 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:07,264 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:55:07,264 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:07,558 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,593 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,594 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:07,639 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:55:07,640 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:55:07,640 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:55:07,642 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:07,942 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,971 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:55:07,973 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:55:08,012 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:55:08,013 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:55:08,014 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:55:08,014 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:55:08,015 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-10 18:55:08,016 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:55:08,023 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:55:08,030 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:55:08,062 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-10 18:55:08,064 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-10 18:55:08,066 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-10 18:55:08,067 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:55:08,069 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:55:08,072 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:55:08,072 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:55:08,072 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:55:09,931 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:55:13,925 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:55:13,939 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:55:23,718 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:55:23,718 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:23,746 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:55:23,747 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:55:32,750 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:55:32,753 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:32,773 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:55:32,774 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:55:42,829 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-10 18:55:42,830 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:55:42,844 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:56:09,426 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:56:14,506 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:56:14,521 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:56:23,303 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:56:23,307 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:56:23,322 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:56:23,324 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:56:32,768 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:56:32,770 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:56:32,783 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:56:32,785 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:56:42,600 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-10 18:56:42,603 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:56:42,622 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Query failed (Parser Error: syntax error at end of input)
+2026-11-10 18:57:07,824 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:57:11,906 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:57:11,921 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:57:23,426 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:57:23,431 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:57:37,209 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:37,272 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:37,274 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:37,634 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:37,663 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:37,664 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:37,968 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,004 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,005 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:38,325 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,355 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,356 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:38,678 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,717 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:38,719 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:38,721 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:57:39,035 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,065 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,066 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:39,346 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,377 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,379 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:39,382 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-10 18:57:39,385 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-10 18:57:39,389 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:57:39,391 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-10 18:57:39,395 | INFO     | test | hello
+2026-11-10 18:57:39,691 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,726 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:39,727 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:39,769 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:57:39,770 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:57:40,074 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,102 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,104 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:40,141 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:57:40,142 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:57:40,441 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,468 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,470 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:40,509 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:57:40,510 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:57:40,511 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:57:40,511 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:57:40,818 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,849 | INFO     | ads.tools.database | Wrote table
+2026-11-10 18:57:40,850 | INFO     | ads.data.seed | Seed complete
+2026-11-10 18:57:40,889 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:57:40,890 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:57:40,891 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:57:40,891 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:57:40,892 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-10 18:57:40,893 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-10 18:57:40,898 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:57:40,901 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:57:40,938 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-10 18:57:40,940 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-10 18:57:40,941 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-10 18:57:40,942 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:57:40,943 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:57:40,944 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:57:40,945 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:57:40,946 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-10 18:59:02,598 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-10 18:59:03,246 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-10 18:59:03,643 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:59:08,027 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-10 18:59:08,029 | INFO     | ads.graph.nodes | [planner] The plan aims to confirm the sales drop and then dissect it by key dimensions to identify the primary contributors to the decline.
+2026-11-10 18:59:08,036 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-10 18:59:08,085 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:59:20,185 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-10 18:59:20,188 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Multiple SQL statements are not allowed
+2026-11-10 18:59:20,189 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-10 18:59:41,928 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-10 18:59:41,931 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-10 18:59:42,008 | INFO     | ads.graph.nodes | [sql_agent] 22 rows (attempt 2)
+2026-11-10 18:59:42,009 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies (stub)
+2026-11-10 18:59:42,011 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-10 18:59:42,012 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-10 18:59:42,015 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-10 18:59:42,017 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 10:55:25,406 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:25,460 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:25,461 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:25,922 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:25,975 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:25,977 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:26,398 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:26,431 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:26,432 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:26,858 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:26,891 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:26,892 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:27,299 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:27,331 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:27,332 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:27,336 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:55:27,746 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:27,783 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:27,785 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:28,142 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:28,175 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:28,176 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:28,184 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 10:55:28,190 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 10:55:28,195 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 10:55:28,198 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 10:55:28,199 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 10:55:28,203 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 10:55:28,205 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 10:55:28,209 | INFO     | test | hello
+2026-11-12 10:55:28,563 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:28,595 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:28,596 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:28,646 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 10:55:28,648 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:55:28,995 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,038 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,040 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:29,090 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 10:55:29,091 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:55:29,478 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,520 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,521 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:29,580 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 10:55:29,581 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 10:55:29,582 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 10:55:29,583 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:55:29,953 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,989 | INFO     | ads.tools.database | Wrote table
+2026-11-12 10:55:29,990 | INFO     | ads.data.seed | Seed complete
+2026-11-12 10:55:30,037 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 10:55:30,039 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 10:55:30,040 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 10:55:30,041 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 10:55:30,042 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 10:55:30,042 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 10:55:30,049 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 10:55:30,061 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 10:55:30,121 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 10:55:30,123 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 10:55:30,125 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 10:55:30,127 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 10:55:30,127 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 10:55:30,129 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-12 10:55:30,129 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-12 10:55:30,131 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-12 10:55:30,133 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 10:55:32,395 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 10:55:37,103 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-12 10:55:37,118 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 10:55:55,837 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 10:55:55,839 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:55:55,867 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Query failed (Binder Error: aggregate function calls cannot be nested
+
+LINE 4:         MAX(CASE WHEN year = MAX(year) THEN quarter ELSE NULL END) AS max_quarter
+                                     ^)
+2026-11-12 10:55:55,870 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 10:56:05,303 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 10:56:05,304 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 10:56:05,348 | INFO     | ads.tools.eda_tool | EDA findings: rows=27 focus=revenue_change anomalies=10
+2026-11-12 10:56:05,350 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:02:48,490 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 11:02:53,880 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:02:54,648 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:02:58,747 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-12 11:02:58,749 | INFO     | ads.graph.nodes | [planner] The plan aims to confirm the sales drop and then dissect it by key dimensions to identify the primary contributors to the decline.
+2026-11-12 11:02:58,753 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:02:58,839 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:03:09,809 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:03:09,811 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:03:09,861 | INFO     | ads.graph.nodes | [sql_agent] 27 rows (attempt 1)
+2026-11-12 11:03:09,871 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:03:09,893 | INFO     | ads.tools.eda_tool | EDA findings: rows=27 focus=revenue_change anomalies=10
+2026-11-12 11:03:09,946 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:03:18,862 | INFO     | ads.graph.nodes | [eda_agent] 10 anomalies
+2026-11-12 11:03:18,882 | INFO     | ads.graph.nodes | [ml_agent] training baseline model (stub)
+2026-11-12 11:03:18,885 | INFO     | ads.graph.nodes | [viz_agent] creating charts (stub)
+2026-11-12 11:03:18,886 | INFO     | ads.graph.nodes | [report_agent] composing report (stub)
+2026-11-12 11:03:18,888 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:07:43,027 | INFO     | matplotlib.font_manager | generated new fontManager
+2026-11-12 11:07:45,472 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:45,524 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:45,526 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:46,071 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:46,114 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:46,116 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:46,597 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:46,640 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:46,641 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:47,197 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:47,247 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:47,250 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:47,774 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:47,826 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:47,828 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:47,830 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:07:48,362 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:48,412 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:48,413 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:48,860 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:48,901 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:07:48,902 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:07:48,914 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 11:07:48,924 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 11:07:48,930 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 11:08:01,713 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 11:08:01,719 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 11:08:01,934 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-1\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 11:08:01,941 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-1\test_report_compose_offline0\report_t1.md
+2026-11-12 11:08:01,945 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 11:08:01,947 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 11:08:01,951 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:08:01,954 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:08:01,961 | INFO     | test | hello
+2026-11-12 11:08:02,447 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:02,490 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:02,493 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:02,560 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:02,562 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:03,076 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:03,125 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:03,127 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:03,184 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:03,186 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:03,695 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:03,744 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:03,745 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:03,807 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:03,808 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:03,810 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:08:03,811 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:04,319 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:04,358 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:04,360 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:04,421 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:04,423 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:04,424 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:08:04,425 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:04,426 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 11:08:04,427 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:04,439 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 11:08:04,454 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:08:04,504 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 11:08:04,506 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:08:04,507 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 11:08:04,509 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:08:04,513 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 11:08:04,516 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 11:08:04,518 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 11:08:04,520 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 11:08:04,521 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:08:04,523 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 11:08:04,526 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:08:04,528 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 11:08:04,529 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:08:28,685 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:28,742 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:28,743 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:29,293 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:29,338 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:29,340 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:29,857 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:29,907 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:29,908 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:30,450 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:30,494 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:30,496 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:30,991 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:31,042 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:31,043 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:31,047 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:31,574 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:31,626 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:31,627 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:32,104 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:32,144 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:32,146 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:32,155 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 11:08:32,161 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 11:08:32,170 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 11:08:34,277 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 11:08:34,282 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 11:08:34,429 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-2\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 11:08:34,437 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-2\test_report_compose_offline0\report_t1.md
+2026-11-12 11:08:34,441 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 11:08:34,445 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 11:08:34,447 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:08:34,452 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:08:34,457 | INFO     | test | hello
+2026-11-12 11:08:34,995 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:35,058 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:35,060 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:35,129 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:35,132 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:35,660 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:35,703 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:35,704 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:35,767 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:35,768 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:36,308 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:36,358 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:36,359 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:36,424 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:36,426 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:36,427 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:08:36,428 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:36,923 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:36,968 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:08:36,969 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:08:37,033 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:37,035 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:37,035 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:08:37,037 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:37,038 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 11:08:37,040 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:08:37,050 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 11:08:37,063 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:08:37,112 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 11:08:37,116 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:08:37,117 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 11:08:37,119 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:08:37,122 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 11:08:37,124 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 11:08:37,125 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 11:08:37,126 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 11:08:37,128 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:08:37,130 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 11:08:37,132 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:08:37,134 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 11:08:37,136 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:08:39,969 | INFO     | ads.graph.workflow | Starting workflow for question: What factors drive revenue? Predict the key drivers.
+2026-11-12 11:08:40,930 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:08:41,590 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:08:47,891 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=True)
+2026-11-12 11:08:47,895 | INFO     | ads.graph.nodes | [planner] The plan uses exploratory analysis, aggregation, and a regression model to identify and quantify key revenue drivers.
+2026-11-12 11:08:47,900 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:08:47,960 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:08:59,407 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:08:59,408 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:08:59,435 | INFO     | ads.graph.nodes | [sql_agent] 7969 rows (attempt 1)
+2026-11-12 11:08:59,439 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:08:59,450 | INFO     | ads.tools.eda_tool | EDA findings: rows=500 focus=revenue anomalies=10
+2026-11-12 11:08:59,464 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:09:07,175 | INFO     | ads.graph.nodes | [eda_agent] 10 anomalies
+2026-11-12 11:09:07,180 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 11:09:09,738 | INFO     | ads.tools.ml_tool | ML regression on target=revenue metrics={'r2': 0.9939, 'mae': 2076.8823}
+2026-11-12 11:09:09,740 | INFO     | ads.graph.nodes | [ml_agent] Trained a baseline regression model on target 'revenue'. Metrics: {'r2': 0.9939, 'mae': 2076.8823}. Top drivers: unit_price (0.6764), units (0.2328), product_Smartphone (0.0385), product_Laptop (0.0374), discount (0.0037).
+2026-11-12 11:09:10,363 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:09:10,559 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\chart_f8e72f57_revenue.png
+2026-11-12 11:09:10,562 | INFO     | ads.graph.nodes | [viz_agent] 1 chart(s)
+2026-11-12 11:09:10,568 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:09:10,592 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:09:18,214 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_f8e72f57.md
+2026-11-12 11:09:18,220 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:13:10,571 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 11:13:13,520 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:13:14,658 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:13:18,702 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-12 11:13:18,707 | INFO     | ads.graph.nodes | [planner] The plan focuses on quantifying the sales drop and then disaggregating sales by key dimensions to pinpoint the specific areas of decline.
+2026-11-12 11:13:18,714 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:13:18,838 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:13:31,572 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:13:31,575 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:13:31,656 | INFO     | ads.graph.nodes | [sql_agent] 27 rows (attempt 1)
+2026-11-12 11:13:31,663 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:13:31,697 | INFO     | ads.tools.eda_tool | EDA findings: rows=27 focus=revenue_change anomalies=10
+2026-11-12 11:13:31,741 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:13:38,687 | INFO     | ads.graph.nodes | [eda_agent] 10 anomalies
+2026-11-12 11:13:38,689 | INFO     | ads.graph.nodes | [ml_agent] skipped (needs_ml=False)
+2026-11-12 11:13:39,459 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:13:39,681 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\chart_09222d00_revenue_change.png
+2026-11-12 11:13:39,683 | INFO     | ads.graph.nodes | [viz_agent] 1 chart(s)
+2026-11-12 11:13:39,689 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:13:39,715 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:13:46,780 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_09222d00.md
+2026-11-12 11:13:46,782 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:20:10,598 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:10,732 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:10,735 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:12,678 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:12,782 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:12,785 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:14,220 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:14,310 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:14,312 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:15,725 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:15,802 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:15,804 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:17,399 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:17,501 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:17,505 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:17,513 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:20:19,082 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:19,168 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:19,171 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:20,524 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:20,606 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:20,608 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:20,629 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 11:20:20,647 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 11:20:20,662 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 11:20:20,678 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-3\test_save_and_list_run0\history\abc123.json
+2026-11-12 11:20:27,456 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 11:20:27,481 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 11:20:29,402 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-3\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 11:20:29,419 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-3\test_report_compose_offline0\report_t1.md
+2026-11-12 11:20:29,442 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 11:20:29,450 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 11:20:29,473 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:20:29,482 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 11:20:29,669 | INFO     | test | hello
+2026-11-12 11:20:31,469 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:31,601 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:31,605 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:31,799 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:20:31,808 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:20:34,158 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:34,432 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:34,435 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:34,895 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:20:34,904 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:20:37,293 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:37,557 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:37,561 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:38,115 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:20:38,119 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:20:38,129 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:20:38,134 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:20:40,310 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:40,959 | INFO     | ads.tools.database | Wrote table
+2026-11-12 11:20:40,962 | INFO     | ads.data.seed | Seed complete
+2026-11-12 11:20:41,465 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:20:41,469 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:20:41,473 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 11:20:41,483 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:20:41,489 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 11:20:41,493 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 11:20:41,560 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 11:20:41,630 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:20:42,060 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 11:20:42,068 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:20:42,070 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 11:20:42,077 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:20:42,082 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 11:20:42,087 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 11:20:42,094 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 11:20:42,100 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 11:20:42,116 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:20:42,120 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 11:20:42,151 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:20:42,173 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 11:20:42,179 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:20:42,186 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-12 11:21:32,531 | INFO     | ads.tools.viz_tool | Saved chart: site\assets\chart_showcase_revenue_change.png
+2026-11-12 11:29:29,066 | INFO     | ads.graph.workflow | Starting workflow for question: What factors drive revenue? Predict the key drivers.
+2026-11-12 11:29:29,097 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:29:29,842 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:29:36,860 | INFO     | ads.agents.planner | Planner produced 6 steps (needs_ml=True)
+2026-11-12 11:29:36,865 | INFO     | ads.graph.nodes | [planner] The plan involves data aggregation, exploratory analysis, building a regression model to predict revenue, and identifying key drivers through feature importance.
+2026-11-12 11:29:36,874 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:29:36,956 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:29:48,312 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:29:48,315 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:29:48,453 | INFO     | ads.graph.nodes | [sql_agent] 2479 rows (attempt 1)
+2026-11-12 11:29:48,461 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:29:48,493 | INFO     | ads.tools.eda_tool | EDA findings: rows=500 focus=total_revenue anomalies=10
+2026-11-12 11:29:48,527 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:29:59,331 | INFO     | ads.graph.nodes | [eda_agent] 10 anomalies
+2026-11-12 11:29:59,350 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 11:30:10,315 | INFO     | ads.tools.ml_tool | ML regression on target=num_transactions metrics={'r2': 0.6968, 'mae': 0.6606}
+2026-11-12 11:30:10,320 | INFO     | ads.graph.nodes | [ml_agent] Trained a baseline regression model on target 'num_transactions'. Metrics: {'r2': 0.6968, 'mae': 0.6606}. Top drivers: total_units (0.7996), avg_discount (0.0405), total_revenue (0.0284), avg_unit_price (0.0265), product_Jacket (0.0102).
+2026-11-12 11:30:11,215 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:30:11,486 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\chart_e1c0e586_total_revenue.png
+2026-11-12 11:30:11,490 | INFO     | ads.graph.nodes | [viz_agent] 1 chart(s)
+2026-11-12 11:30:11,501 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:30:11,531 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:30:13,199 | WARNING  | ads.agents.report_agent | Report via LLM failed, using template: Gemini completion failed (503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}})
+2026-11-12 11:30:13,204 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_e1c0e586.md
+2026-11-12 11:30:13,206 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:30:13,206 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\e1c0e586.json
+2026-11-12 11:31:58,908 | INFO     | ads.graph.workflow | Starting workflow for question: Compare online vs retail vs partner channel revenue by region.
+2026-11-12 11:31:58,920 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 11:31:59,032 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:32:14,262 | WARNING  | ads.agents.planner | Planner LLM unavailable, using default plan: Gemini completion failed (503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}})
+2026-11-12 11:32:14,267 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 11:32:14,272 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 11:32:14,363 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:32:52,469 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 11:32:52,469 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 11:32:52,542 | INFO     | ads.graph.nodes | [sql_agent] 12 rows (attempt 1)
+2026-11-12 11:32:52,546 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 11:32:52,554 | INFO     | ads.tools.eda_tool | EDA findings: rows=12 focus=total_revenue anomalies=0
+2026-11-12 11:32:52,584 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:35:32,533 | WARNING  | ads.agents.eda_agent | EDA narrative via LLM failed, using template: Gemini completion failed (503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}})
+2026-11-12 11:35:32,560 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 11:35:32,563 | INFO     | ads.graph.nodes | [ml_agent] skipped (needs_ml=False)
+2026-11-12 11:35:32,567 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 11:35:32,756 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\chart_4ade966a_total_revenue.png
+2026-11-12 11:35:32,760 | INFO     | ads.graph.nodes | [viz_agent] 1 chart(s)
+2026-11-12 11:35:32,762 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 11:35:32,784 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 11:35:33,214 | WARNING  | ads.agents.report_agent | Report via LLM failed, using template: Gemini completion failed (429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\nPlease retry in 1h54m26.860015994s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://aistudio.google.com/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '6866s'}]}})
+2026-11-12 11:35:33,221 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_4ade966a.md
+2026-11-12 11:35:33,224 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 11:35:33,228 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\4ade966a.json
+2026-11-12 11:48:52,704 | INFO     | httpx2 | HTTP Request: GET http://testserver/health "HTTP/1.1 200 OK"
+2026-11-12 11:48:52,738 | INFO     | httpx2 | HTTP Request: GET http://testserver/examples "HTTP/1.1 200 OK"
+2026-11-12 12:51:43,223 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 13:03:01,591 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 16:00:03,738 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:03,797 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:03,797 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:04,313 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:04,356 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:04,356 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:04,886 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:04,944 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:04,944 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:05,505 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:05,551 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:05,552 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:06,102 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:06,175 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:06,175 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:06,183 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:00:06,696 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:06,751 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:06,754 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:07,163 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:07,210 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:07,212 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:07,229 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 16:00:07,239 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 16:00:07,253 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 16:00:07,262 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-4\test_save_and_list_run0\history\abc123.json
+2026-11-12 16:00:23,646 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 16:00:23,652 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 16:00:23,917 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-4\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 16:00:23,927 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-4\test_report_compose_offline0\report_t1.md
+2026-11-12 16:00:23,927 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 16:00:23,934 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 16:00:23,936 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 16:00:23,942 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 16:00:23,948 | INFO     | test | hello
+2026-11-12 16:00:24,520 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:24,569 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:24,574 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:24,641 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:00:24,641 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:00:25,234 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:25,294 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:25,294 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:25,378 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:00:25,380 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:00:25,963 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:26,040 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:26,044 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:26,120 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:00:26,128 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:00:26,130 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 16:00:26,130 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:00:26,708 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:26,772 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:00:26,772 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:00:26,848 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:00:26,848 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:00:26,853 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 16:00:26,853 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:00:26,855 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 16:00:26,855 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:00:26,865 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 16:00:26,884 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 16:00:26,946 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 16:00:26,951 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 16:00:26,953 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 16:00:26,954 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 16:00:26,954 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 16:00:26,954 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 16:00:26,954 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 16:00:26,954 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 16:00:26,963 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 16:00:26,963 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 16:00:26,967 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 16:00:26,971 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 16:00:26,971 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 16:00:26,977 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-12 16:44:18,967 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:19,021 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:19,024 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:19,571 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:19,615 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:19,616 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:20,145 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:20,200 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:20,202 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:21,416 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:21,512 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:21,514 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:22,750 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:22,830 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:22,833 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:22,839 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:44:23,766 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:23,828 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:23,831 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:24,523 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:24,587 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:24,589 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:24,608 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 16:44:24,617 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 16:44:24,629 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 16:44:24,639 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-5\test_save_and_list_run0\history\abc123.json
+2026-11-12 16:44:27,975 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 16:44:27,979 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 16:44:28,131 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-5\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 16:44:28,137 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-5\test_report_compose_offline0\report_t1.md
+2026-11-12 16:44:28,142 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 16:44:28,144 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 16:44:28,147 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 16:44:28,150 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 16:44:28,156 | INFO     | test | hello
+2026-11-12 16:44:28,599 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:28,649 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:28,651 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:28,718 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:44:28,721 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:44:29,216 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:29,285 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:29,289 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:29,371 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:44:29,373 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:44:30,031 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:30,084 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:30,085 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:30,176 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:44:30,177 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:44:30,179 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 16:44:30,180 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 16:44:30,769 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:30,819 | INFO     | ads.tools.database | Wrote table
+2026-11-12 16:44:30,823 | INFO     | ads.data.seed | Seed complete
+2026-11-12 16:44:30,902 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 16:44:30,906 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:44:30,908 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 16:44:30,910 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:44:30,911 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 16:44:30,912 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 16:44:30,927 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 16:44:30,953 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 16:44:31,018 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 16:44:31,023 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 16:44:31,026 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 16:44:31,028 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 16:44:31,031 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 16:44:31,033 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 16:44:31,035 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 16:44:31,037 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 16:44:31,040 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 16:44:31,042 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 16:44:31,044 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 16:44:31,046 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 16:44:31,047 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 16:44:31,050 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-12 16:59:27,869 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 17:00:34,769 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 17:00:38,986 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 17:00:41,697 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 17:01:54,577 | INFO     | google_genai.models | AFC is enabled with max remote calls: 10.
+2026-11-12 17:03:12,598 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:12,630 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:12,631 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:12,964 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:12,998 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:12,998 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:13,319 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:13,351 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:13,351 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:13,701 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:13,734 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:13,735 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:14,068 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,101 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,103 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:14,104 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:03:14,429 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,460 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,461 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:14,765 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,800 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:14,801 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:14,811 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 17:03:14,818 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 17:03:14,823 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 17:03:14,823 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-6\test_save_and_list_run0\history\abc123.json
+2026-11-12 17:03:17,254 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 17:03:17,259 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 17:03:17,408 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-6\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 17:03:17,414 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-6\test_report_compose_offline0\report_t1.md
+2026-11-12 17:03:17,416 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 17:03:17,419 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 17:03:17,422 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 17:03:17,426 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 17:03:17,432 | INFO     | test | hello
+2026-11-12 17:03:17,891 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:17,941 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:17,943 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:18,017 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:03:18,020 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:03:18,907 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:19,018 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:19,020 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:19,213 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:03:19,216 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:03:19,818 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:19,866 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:19,867 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:19,934 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:03:19,935 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:03:19,937 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 17:03:19,938 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:03:20,381 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:20,430 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:03:20,431 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:03:20,487 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:03:20,489 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:03:20,490 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 17:03:20,490 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:03:20,490 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 17:03:20,490 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:03:20,490 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 17:03:20,516 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 17:03:20,567 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 17:03:20,568 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 17:03:20,571 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 17:03:20,573 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 17:03:20,575 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 17:03:20,577 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 17:03:20,578 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 17:03:20,579 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 17:03:20,581 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 17:03:20,582 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 17:03:20,584 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 17:03:20,585 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 17:03:20,587 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 17:03:20,592 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-12 17:12:30,444 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:30,497 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:30,499 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:30,907 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:30,936 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:30,937 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:31,267 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:31,298 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:31,299 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:31,650 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:31,679 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:31,680 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:31,988 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,024 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,025 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:32,027 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:12:32,349 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,379 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,380 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:32,678 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,709 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:32,710 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:32,716 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-12 17:12:32,719 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-12 17:12:32,723 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-12 17:12:32,729 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-7\test_save_and_list_run0\history\abc123.json
+2026-11-12 17:12:34,103 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-12 17:12:34,106 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-12 17:12:34,201 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-7\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-12 17:12:34,206 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-7\test_report_compose_offline0\report_t1.md
+2026-11-12 17:12:34,209 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-12 17:12:34,211 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-12 17:12:34,211 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 17:12:34,211 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-12 17:12:34,218 | INFO     | test | hello
+2026-11-12 17:12:34,515 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:34,547 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:34,549 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:34,591 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:12:34,591 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:12:34,905 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:34,938 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:34,939 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:34,984 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:12:34,985 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:12:35,294 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:35,324 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:35,326 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:35,365 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:12:35,366 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:12:35,366 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 17:12:35,367 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:12:35,674 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:35,709 | INFO     | ads.tools.database | Wrote table
+2026-11-12 17:12:35,710 | INFO     | ads.data.seed | Seed complete
+2026-11-12 17:12:35,749 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:12:35,750 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:12:35,751 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-12 17:12:35,751 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:12:35,752 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-12 17:12:35,753 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-12 17:12:35,761 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 17:12:35,769 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 17:12:35,804 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 17:12:35,805 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 17:12:35,807 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-12 17:12:35,809 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 17:12:35,810 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 17:12:35,811 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 17:12:35,812 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 17:12:35,813 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 17:12:35,814 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 17:12:35,815 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 17:12:35,816 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 17:12:35,817 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-12 17:12:35,818 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 17:12:35,819 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-12 17:16:14,751 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 17:16:15,446 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 17:16:15,483 | WARNING  | ads.agents.planner | Planner LLM unavailable, using default plan: `openai` package not installed. `pip install openai`
+2026-11-12 17:16:15,484 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-12 17:16:15,488 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 17:16:15,522 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM unavailable: `openai` package not installed. `pip install openai`
+2026-11-12 17:16:15,527 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 17:16:15,531 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-12 17:16:15,534 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-12 17:16:15,536 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-12 17:16:15,536 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-12 17:16:15,956 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 17:16:15,958 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-12 17:16:15,961 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 17:16:15,963 | WARNING  | ads.agents.report_agent | Report via LLM failed, using template: `openai` package not installed. `pip install openai`
+2026-11-12 17:16:15,964 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_7ccfbaa7.md
+2026-11-12 17:16:15,966 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 17:16:15,975 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\7ccfbaa7.json
+2026-11-12 17:17:35,143 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-11-12 17:17:35,160 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Groq completion failed (Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.)
+2026-11-12 17:17:35,210 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-11-12 17:17:35,213 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Groq completion failed (Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.)
+2026-11-12 17:17:35,259 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 404 Not Found"
+2026-11-12 17:17:35,265 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Groq completion failed (Error code: 404 - The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.)
+2026-11-12 17:18:07,041 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-12 17:18:09,282 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-12 17:18:25,341 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-12 17:18:26,021 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-12 17:18:27,862 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-12 17:18:27,867 | INFO     | ads.agents.planner | Planner produced 5 steps (needs_ml=False)
+2026-11-12 17:18:27,868 | INFO     | ads.graph.nodes | [planner] The plan uses SQL to quantify the drop and isolate contributing factors, with visual aids to highlight the drivers.
+2026-11-12 17:18:27,873 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-12 17:18:35,681 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-12 17:18:35,687 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-12 17:18:35,693 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-12 17:18:35,751 | INFO     | ads.graph.nodes | [sql_agent] 16 rows (attempt 1)
+2026-11-12 17:18:35,755 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-12 17:18:35,765 | INFO     | ads.tools.eda_tool | EDA findings: rows=16 focus=revenue_change anomalies=6
+2026-11-12 17:18:35,768 | INFO     | ads.graph.nodes | [eda_agent] 6 anomalies
+2026-11-12 17:18:35,769 | INFO     | ads.graph.nodes | [ml_agent] skipped (needs_ml=False)
+2026-11-12 17:18:36,196 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-12 17:18:36,295 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\chart_483e6d64_revenue_change.png
+2026-11-12 17:18:36,297 | INFO     | ads.graph.nodes | [viz_agent] 1 chart(s)
+2026-11-12 17:18:36,300 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-12 17:18:38,135 | INFO     | httpx2 | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-11-12 17:18:38,137 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\report_483e6d64.md
+2026-11-12 17:18:38,138 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-12 17:18:38,143 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\autonomous-data-scientist\artifacts\history\483e6d64.json
+2026-11-19 10:32:22,839 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\Downloads\double9books\autonomous-data-scientist\artifacts\chart_test_revenue.png
+2026-11-19 10:51:05,211 | INFO     | httpx2 | HTTP Request: GET http://testserver/health "HTTP/1.1 200 OK"
+2026-11-19 10:51:05,242 | INFO     | httpx2 | HTTP Request: GET http://testserver/health "HTTP/1.1 200 OK"
+2026-11-19 10:51:05,245 | INFO     | httpx2 | HTTP Request: GET http://testserver/examples "HTTP/1.1 200 OK"
+2026-11-19 10:51:05,252 | INFO     | httpx2 | HTTP Request: GET http://testserver/providers "HTTP/1.1 200 OK"
+2026-11-19 10:51:05,252 | INFO     | httpx2 | HTTP Request: GET http://testserver/providers "HTTP/1.1 200 OK"
+2026-11-19 10:51:26,014 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,054 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,054 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:26,384 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,432 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,432 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:26,771 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,804 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:26,809 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:27,164 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,197 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,197 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:27,536 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,574 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,577 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:27,579 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:27,935 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,965 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:27,974 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:28,287 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:28,316 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:28,316 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:28,328 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-19 10:51:28,338 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-19 10:51:28,344 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-19 10:51:28,349 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-8\test_save_and_list_run0\history\abc123.json
+2026-11-19 10:51:37,827 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-19 10:51:37,827 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-19 10:51:37,965 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-8\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-19 10:51:37,975 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-8\test_report_compose_offline0\report_t1.md
+2026-11-19 10:51:37,979 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-19 10:51:37,980 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-19 10:51:37,982 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:51:37,982 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:51:38,749 | INFO     | test | hello
+2026-11-19 10:51:39,057 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,096 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,096 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:39,154 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:39,154 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:39,471 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,515 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,515 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:39,562 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:39,571 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:39,895 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,932 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:39,932 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:39,982 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:39,982 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:51:39,982 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:51:39,982 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:40,304 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:40,345 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:40,350 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:40,394 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:40,394 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:51:40,394 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:51:40,402 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:51:40,402 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-19 10:51:40,402 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:51:40,409 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-19 10:51:40,419 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-19 10:51:40,453 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-19 10:51:40,458 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-19 10:51:40,458 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-19 10:51:40,461 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-19 10:51:40,461 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-19 10:51:40,469 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-19 10:51:40,470 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\double9books\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-19 10:51:40,471 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-19 10:51:40,471 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\double9books\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-19 10:51:54,629 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:54,673 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:54,673 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:55,006 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,046 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,046 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:55,387 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,423 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,423 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:55,778 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,812 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:55,812 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:56,147 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,178 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,178 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:56,187 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:56,514 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,547 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,547 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:56,845 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,881 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:56,889 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:56,896 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-19 10:51:56,897 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-19 10:51:56,897 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-19 10:51:56,910 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-9\test_save_and_list_run0\history\abc123.json
+2026-11-19 10:51:58,202 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-19 10:51:58,202 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-19 10:51:58,294 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-9\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-19 10:51:58,295 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-9\test_report_compose_offline0\report_t1.md
+2026-11-19 10:51:58,301 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-19 10:51:58,302 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-19 10:51:58,302 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:51:58,302 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:51:58,311 | INFO     | test | hello
+2026-11-19 10:51:58,622 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:58,661 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:58,661 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:58,711 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:58,713 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:59,061 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:59,111 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:59,111 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:59,161 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:59,167 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:59,523 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:59,570 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:51:59,570 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:51:59,627 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:51:59,627 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:51:59,627 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:51:59,632 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:51:59,997 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:52:00,046 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:52:00,051 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:52:00,094 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:52:00,094 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:52:00,094 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:52:00,094 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:52:00,103 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-19 10:52:00,103 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:52:00,108 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-19 10:52:00,121 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-19 10:52:00,159 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-19 10:52:00,164 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-19 10:52:00,166 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-19 10:52:00,168 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-19 10:52:00,170 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-19 10:52:00,170 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-19 10:52:00,172 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-19 10:52:00,172 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-19 10:52:00,174 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-19 10:52:00,174 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-19 10:52:00,176 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-19 10:52:00,176 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\double9books\autonomous-data-scientist\artifacts\report_t1.md
+2026-11-19 10:52:00,178 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-19 10:52:00,182 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\double9books\autonomous-data-scientist\artifacts\history\t1.json
+2026-11-19 10:55:50,152 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,195 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,195 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:50,541 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,576 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,576 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:50,906 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,941 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:50,947 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:51,309 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:51,350 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:51,350 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:51,688 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:51,729 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:51,729 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:51,729 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:55:52,067 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:52,109 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:52,109 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:52,420 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:52,446 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:52,446 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:52,454 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-19 10:55:52,463 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-19 10:55:52,465 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0
+2026-11-19 10:55:52,471 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-10\test_save_and_list_run0\history\abc123.json
+2026-11-19 10:55:53,833 | INFO     | ads.tools.ml_tool | ML regression on target=target metrics={'r2': 0.9916, 'mae': 0.2995}
+2026-11-19 10:55:53,842 | INFO     | ads.agents.ml_agent | ML skipped/failed: Insufficient rows (3) to train a reliable model (need >= 20).
+2026-11-19 10:55:53,951 | INFO     | ads.tools.viz_tool | Saved chart: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-10\test_make_charts_creates_png0\chart_test_revenue_change.png
+2026-11-19 10:55:53,957 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\AppData\Local\Temp\pytest-of-User\pytest-10\test_report_compose_offline0\report_t1.md
+2026-11-19 10:55:53,959 | INFO     | ads.agents.planner | Planner produced 3 steps (needs_ml=True)
+2026-11-19 10:55:53,959 | INFO     | ads.agents.planner | Planner produced 2 steps (needs_ml=False)
+2026-11-19 10:55:53,959 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:55:53,965 | WARNING  | ads.agents.planner | Planner parse/validation failed, using default plan: No JSON object found in LLM reply
+2026-11-19 10:55:53,965 | INFO     | test | hello
+2026-11-19 10:55:54,318 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:54,364 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:54,364 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:54,419 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:55:54,424 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:55:54,814 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:54,856 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:54,856 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:54,908 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:55:54,910 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:55:55,313 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:55,364 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:55,366 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:55,463 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:55:55,465 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:55:55,469 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:55:55,469 | INFO     | ads.tools.sql_tool | Executing SQL
+2026-11-19 10:55:55,949 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:55,990 | INFO     | ads.tools.database | Wrote table
+2026-11-19 10:55:55,990 | INFO     | ads.data.seed | Seed complete
+2026-11-19 10:55:56,052 | INFO     | ads.agents.sql_agent | SQL attempt 1
+2026-11-19 10:55:56,052 | WARNING  | ads.agents.sql_agent | SQL attempt 1 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:55:56,052 | INFO     | ads.agents.sql_agent | SQL attempt 2
+2026-11-19 10:55:56,052 | WARNING  | ads.agents.sql_agent | SQL attempt 2 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:55:56,052 | INFO     | ads.agents.sql_agent | SQL attempt 3
+2026-11-19 10:55:56,052 | WARNING  | ads.agents.sql_agent | SQL attempt 3 failed: Only SELECT/WITH queries are allowed
+2026-11-19 10:55:56,063 | INFO     | ads.graph.workflow | Starting workflow for question: Why did sales drop in Maharashtra last quarter?
+2026-11-19 10:55:56,073 | INFO     | ads.graph.nodes | [planner] planning
+2026-11-19 10:55:56,073 | INFO     | ads.graph.nodes | [planner] Default plan (LLM planner unavailable).
+2026-11-19 10:55:56,073 | INFO     | ads.graph.nodes | [sql_agent] generating & running SQL
+2026-11-19 10:55:56,079 | ERROR    | ads.graph.nodes | [sql_agent] failed after 0 attempts: LLM disabled (offline)
+2026-11-19 10:55:56,079 | INFO     | ads.graph.nodes | [eda_agent] profiling & detecting anomalies
+2026-11-19 10:55:56,079 | INFO     | ads.graph.nodes | [eda_agent] 0 anomalies
+2026-11-19 10:55:56,079 | INFO     | ads.graph.nodes | [ml_agent] training baseline model
+2026-11-19 10:55:56,079 | INFO     | ads.agents.ml_agent | ML skipped/failed: No data to model.
+2026-11-19 10:55:56,085 | INFO     | ads.graph.nodes | [ml_agent] No data to model.
+2026-11-19 10:55:56,087 | INFO     | ads.graph.nodes | [viz_agent] creating charts
+2026-11-19 10:55:56,090 | INFO     | ads.graph.nodes | [viz_agent] 0 chart(s)
+2026-11-19 10:55:56,090 | INFO     | ads.graph.nodes | [report_agent] composing report
+2026-11-19 10:55:56,090 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\double9books\autonomous-data-scientist\backend\artifacts\report_t1.md
+2026-11-19 10:55:56,096 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
+2026-11-19 10:55:56,096 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\double9books\autonomous-data-scientist\backend\artifacts\history\t1.json

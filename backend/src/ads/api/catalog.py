@@ -10,10 +10,12 @@ EXAMPLES = [
 ]
 
 # Models shown in the UI dropdown (only those with a server-side key actually appear).
+# Order = priority. Groq (strong) is first, so it is the default on initial render;
+# Gemini is the lightweight fallback.
 PROVIDER_CATALOG = [
-    {"id": "gemini", "label": "Google Gemini · Flash-Lite", "model": "gemini-flash-lite-latest"},
     {"id": "groq", "label": "Groq · GPT-OSS 120B (strong, free)", "model": "openai/gpt-oss-120b"},
     {"id": "groq", "label": "Groq · GPT-OSS 20B (fastest)", "model": "openai/gpt-oss-20b"},
+    {"id": "gemini", "label": "Google Gemini · Flash-Lite", "model": "gemini-flash-lite-latest"},
 ]
 
 

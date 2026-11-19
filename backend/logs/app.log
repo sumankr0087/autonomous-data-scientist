@@ -1388,3 +1388,6 @@ LINE 4:         MAX(CASE WHEN year = MAX(year) THEN quarter ELSE NULL END) AS ma
 2026-11-19 10:55:56,090 | INFO     | ads.agents.report_agent | Saved report: C:\Users\User\Downloads\double9books\autonomous-data-scientist\backend\artifacts\report_t1.md
 2026-11-19 10:55:56,096 | INFO     | ads.graph.workflow | Workflow finished: status=completed, steps=['planner', 'sql_agent', 'eda_agent', 'ml_agent', 'viz_agent', 'report_agent']
 2026-11-19 10:55:56,096 | INFO     | ads.core.memory | Saved run to memory: C:\Users\User\Downloads\double9books\autonomous-data-scientist\backend\artifacts\history\t1.json
+2026-11-19 11:04:53,680 | INFO     | ads.tools.eda_tool | EDA findings: rows=3 focus=revenue_change anomalies=0
+2026-11-19 11:04:53,712 | INFO     | ads.tools.eda_tool | EDA findings: rows=10 focus=value anomalies=1
+2026-11-19 11:04:53,724 | INFO     | ads.tools.eda_tool | EDA findings: rows=2 focus=revenue_change anomalies=0

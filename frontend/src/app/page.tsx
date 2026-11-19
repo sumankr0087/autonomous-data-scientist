@@ -32,10 +32,15 @@ export default function Home() {
   useEffect(() => {
     getProviders(apiBase)
       .then((d) => {
-        setModels(d.providers || []);
+        const list = d.providers || [];
+        setModels(list);
+        if (!list.length) return;
+        // Priority: Groq first (stronger SQL), then backend default, then first listed.
+        const groq = list.find((m) => m.provider === "groq");
         const def = `${d.default_provider}|${d.default_model}`;
-        const has = (d.providers || []).some((m) => `${m.provider}|${m.model}` === def);
-        if (d.providers?.length) setSel(has ? def : `${d.providers[0].provider}|${d.providers[0].model}`);
+        const hasDef = list.some((m) => `${m.provider}|${m.model}` === def);
+        if (groq) setSel(`${groq.provider}|${groq.model}`);
+        else setSel(hasDef ? def : `${list[0].provider}|${list[0].model}`);
       })
       .catch(() => {});
   }, [apiBase]);

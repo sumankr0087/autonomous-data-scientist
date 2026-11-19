@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { FiSend, FiSettings, FiPlus, FiTrash2, FiMenu, FiInfo, FiX } from "react-icons/fi";
+import { FiSend, FiSettings, FiPlus, FiTrash2, FiMenu, FiInfo, FiX, FiCopy, FiEdit3, FiCheck } from "react-icons/fi";
 
 const EXAMPLES = [
   "Why did sales drop in Maharashtra last quarter?",
@@ -56,6 +56,23 @@ export default function Home() {
   const [error, setError] = useState("");
   const [models, setModels] = useState<{ provider: string; model: string; label: string }[]>([]);
   const [sel, setSel] = useState<string>(""); // "provider|model"
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const copyPrompt = (id: string, text: string) => {
+    navigator.clipboard?.writeText(text).then(
+      () => {
+        setCopiedId(id);
+        setTimeout(() => setCopiedId((c) => (c === id ? null : c)), 1500);
+      },
+      () => {},
+    );
+  };
+
+  const editPrompt = (text: string) => {
+    setQuestion(text);
+    inputRef.current?.focus();
+  };
   const endRef = useRef<HTMLDivElement>(null);
 
   // Load the selectable models from the backend.
@@ -295,9 +312,26 @@ export default function Home() {
 
             {active?.messages.map((m) => (
               <div key={m.id} className="space-y-3">
-                <div className="flex justify-end">
+                <div className="flex flex-col items-end gap-1 group">
                   <div className="bg-violet-600 text-white rounded-2xl rounded-br-sm px-4 py-2 text-sm max-w-[85%]">
                     {m.question}
+                  </div>
+                  <div className="flex gap-2 text-neutral-400 opacity-0 group-hover:opacity-100 transition">
+                    <button
+                      onClick={() => copyPrompt(m.id, m.question)}
+                      title="Copy prompt"
+                      className="hover:text-violet-600 flex items-center gap-1 text-xs"
+                    >
+                      {copiedId === m.id ? <FiCheck size={13} /> : <FiCopy size={13} />}
+                      {copiedId === m.id ? "Copied" : "Copy"}
+                    </button>
+                    <button
+                      onClick={() => editPrompt(m.question)}
+                      title="Edit prompt"
+                      className="hover:text-violet-600 flex items-center gap-1 text-xs"
+                    >
+                      <FiEdit3 size={13} /> Edit
+                    </button>
                   </div>
                 </div>
                 <AnswerCard result={m.result} />
@@ -342,6 +376,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <div className="flex gap-2">
               <input
+                ref={inputRef}
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && run()}
